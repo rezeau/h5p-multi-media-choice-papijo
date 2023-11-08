@@ -1,0 +1,49 @@
+{
+  "name": "h5p-multi-media-choice-papijo",
+  "version": "0.0.0",
+  "description": "Multi media choice papijo for H5P",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development webpack",
+    "build": "cross-env NODE_ENV=production webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rezeau/h5p-multi-media-choice-papijo.git"
+  },
+  "keywords": [
+    "h5p",
+    "library",
+    "multi-media-choice-papijo"
+  ],
+  "author": "Joubel AS <contact@joubel.com> (https://joubel.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rezeau/h5p-multi-media-choice-papijo/issues"
+  },
+  "homepage": "https://github.com/rezeau/h5p-multi-media-choice-papijo#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/plugin-transform-destructuring": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "babel-loader": "^8.2.5",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "editorconfig": "^0.15.3",
+    "eslint": "^8.18.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "prettier-eslint-cli": "^6.0.1",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "webpack": "^5.76.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "masonry-layout": "^4.2.2"
+  }
+}
