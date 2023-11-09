@@ -73,9 +73,9 @@ export default class MultiMediaChoice extends H5P.Question {
         this.introduction = document.createElement('div');
         this.introduction.innerHTML = this.params.question;
         this.introduction.setAttribute('id', `h5p-media-choice${contentId}`);
-        const div = document.createElement('img');
-        // papijo removed this line, what is it for?
-        //div.src = this.getLibraryFilePath('assets/placeholder1to1.svg');
+        // papijo removed 2 lines throwing error, what is this div for?
+        // const div = document.createElement('img');        
+        // div.src = this.getLibraryFilePath('assets/placeholder1to1.svg');
         this.setIntroduction(this.introduction);
       }
 
@@ -209,7 +209,7 @@ export default class MultiMediaChoice extends H5P.Question {
    * Add the buttons that are passed to H5P.Question
    */
   addButtons() {
-    if (this.params.behaviour.enableCheckButton == undefined || this.params.behaviour.enableCheckButton) {
+    if (this.params.behaviour.enableCheckButton === undefined || this.params.behaviour.enableCheckButton) {
       this.addButton(
         'check-answer',
         this.params.l10n.checkAnswerButtonText,

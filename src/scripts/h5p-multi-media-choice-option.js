@@ -100,7 +100,7 @@ export class MultiMediaChoiceOption {
    */
   buildImage() {
     const alt = this.media.params.alt ? this.media.params.alt : '';
-    const title = this.media.params.title ? this.media.params.title : '';
+    // const title = this.media.params.title ? this.media.params.title : '';
 
     let path = '';
     if (this.media.params.file) { 
