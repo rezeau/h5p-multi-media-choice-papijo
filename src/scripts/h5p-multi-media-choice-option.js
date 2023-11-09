@@ -89,7 +89,7 @@ export class MultiMediaChoiceOption {
   buildLegend() {
     const title = this.media.params.title ? this.media.params.title : '';
     const legend = document.createElement('div');
-    legend.textContent = title;
+    legend.textContent = htmlDecode(title);
     legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden');
     return legend;
   }
