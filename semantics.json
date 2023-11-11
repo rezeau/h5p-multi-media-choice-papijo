@@ -209,7 +209,16 @@
         "name": "showSolutionsRequiresInput",
         "type": "boolean",
         "default": true,
-        "optional": true
+        "optional": true,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "enableSolutionsButton",
+              "equals": true
+            }
+          ]
+        }
       },
       {
         "name": "questionType",
@@ -285,6 +294,28 @@
           {
             "value": "4",
             "label": "4"
+          }
+        ]
+      },
+      {
+        "name": "textAlign",
+        "type": "select",
+        "label": "Legends text alignment",
+        "importance": "low",
+        "description": "Select the alignment of the images legend/feedback text.",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left (default)"
+          },
+          {
+            "value": "center",
+            "label": "Centered"
+          },
+          {
+            "value": "justify",
+            "label": "Justified"
           }
         ]
       },

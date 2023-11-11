@@ -33,7 +33,7 @@ export default class MultiMediaChoiceContent {
 
     this.aspectRatio = this.params.behaviour.aspectRatio;
     this.shuffleImages = this.params.behaviour.shuffleImages;
-
+    this.textAlign = this.params.behaviour.textAlign;
     this.lastSelectedRadioButtonOption = null;
 
     this.content = document.createElement('div');
@@ -78,6 +78,7 @@ export default class MultiMediaChoiceContent {
             contentId,
             this.aspectRatio,
             this.isSingleAnswer,
+            this.textAlign,
             this.params.l10n.missingAltText,
             {
               onClick: () => this.toggleSelected(index),

@@ -11,12 +11,12 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, callbacks) {
+  constructor(option, contentId, aspectRatio, singleAnswer, textAlign, missingAltText, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
     this.missingAltText = missingAltText;
-
+    this.textAlign = textAlign;
     this.media = option.media;
     this.correct = option.correct;
 
@@ -44,6 +44,7 @@ export class MultiMediaChoiceOption {
 
     const mediaContent = this.createMediaContent();
     this.wrapper.appendChild(mediaContent);
+    this.wrapper.appendChild(this.buildLegend(this.option));
 
     this.addKeyboardHandlers();
   }
@@ -64,7 +65,6 @@ export class MultiMediaChoiceOption {
     switch (this.media.library.split(' ')[0]) {
       case 'H5P.Image':
         mediaWrapper.appendChild(this.buildImage(this.option));
-        mediaWrapper.appendChild(this.buildLegend(this.option));
         return mediaWrapper;
     }
   }
@@ -90,7 +90,8 @@ export class MultiMediaChoiceOption {
     const title = this.media.params.title ? this.media.params.title : '';
     const legend = document.createElement('div');
     legend.textContent = htmlDecode(title);
-    legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden');
+    legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
+      'h5p-multi-media-choice-legend-' + this.textAlign + '');
     return legend;
   }
 
