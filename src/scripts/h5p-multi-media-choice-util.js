@@ -20,7 +20,9 @@ export class Util {
           confirmRetryDialog: false,
           aspectRatio: 'auto',
           maxAlternativesPerRow: 4,
-          textAlign: 'left'
+          textAlign: 'left',
+          reportText: 'altText',
+          legendText: 'noText'
         },
         l10n: {
           checkAnswerButtonText: 'Check',

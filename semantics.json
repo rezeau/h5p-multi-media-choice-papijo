@@ -76,7 +76,7 @@
           "type": "library",
           "label": "Media",
           "optional": false,
-          "description": "<h3> Image to display as the choice. The alternative text is used by the report.</h3>",
+          "description": "Image to display as the choice. For the use of the alternative and hover texts, see the options available at the end of the Behavioural settings below.",
           "options": [
             "H5P.Image 1.1"
           ]
@@ -298,6 +298,46 @@
         ]
       },
       {
+        "name": "reportText",
+        "type": "select",
+        "label": "For the xAPI report use:",
+        "importance": "low",
+        "description": "By default Images Alternative text is used in the xAPI reports. You can use the Hover text instead.",
+        "default": "altText",
+        "options": [
+          {
+            "value": "altText",
+            "label": "Alternative text (default)"
+          },
+          {
+            "value": "hoverText",
+            "label": "Hover text"
+          }
+        ]
+      },
+      {
+        "name": "legendText",
+        "type": "select",
+        "label": "For the legend/feedback text use:",
+        "importance": "low",
+        "description": "Use this option to display a legend/feedback text under correctly selected images (and correctly unselected images when the activity is completed).",
+        "default": "noText",
+        "options": [
+          {
+            "value": "noText",
+            "label": "Do not display any text (default)."
+          },
+          {
+            "value": "altText",
+            "label": "Alternative text"
+          },
+          {
+            "value": "hoverText",
+            "label": "Hover text"
+          }
+        ]
+      },
+      {
         "name": "textAlign",
         "type": "select",
         "label": "Legends text alignment",
@@ -317,7 +357,19 @@
             "value": "justify",
             "label": "Justified"
           }
-        ]
+        ],
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "legendText",
+              "equals": [
+                "altText",
+                "hoverText"
+              ]
+            }
+          ]
+        }
       },
       {
         "label": "Pass percentage",
