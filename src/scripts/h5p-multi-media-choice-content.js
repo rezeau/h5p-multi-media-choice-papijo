@@ -37,6 +37,7 @@ export default class MultiMediaChoiceContent {
     this.textAlign = this.params.behaviour.textAlign;
     this.lastSelectedRadioButtonOption = null;
     this.reportText = this.params.behaviour.reportText;
+    this.hoveringText = this.params.behaviour.hoveringText;
     this.legendText = this.params.behaviour.legendText;
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
@@ -82,6 +83,7 @@ export default class MultiMediaChoiceContent {
             this.isSingleAnswer,
             this.textAlign,
             this.reportText,
+            this.hoveringText,
             this.legendText,
             this.params.l10n.missingAltText,
             {

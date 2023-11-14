@@ -22,6 +22,7 @@ export class Util {
           maxAlternativesPerRow: 4,
           textAlign: 'left',
           reportText: 'altText',
+          hoveringText: 'noText',
           legendText: 'noText'
         },
         l10n: {

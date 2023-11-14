@@ -11,7 +11,7 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, textAlign, reportText, legendText, missingAltText, callbacks, toto) {
+  constructor(option, contentId, aspectRatio, singleAnswer, textAlign, reportText, hoveringText, legendText, missingAltText, callbacks, toto) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
@@ -26,6 +26,7 @@ export class MultiMediaChoiceOption {
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.reportText = reportText;
+    this.hoveringText = hoveringText;
     this.legendText = legendText;
     this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-list-item');
@@ -123,7 +124,15 @@ export class MultiMediaChoiceOption {
   buildImage() {
     const alt = this.media.params.alt ? this.media.params.alt : '';
     // const title = this.media.params.title ? this.media.params.title : '';
-
+    let title = '';
+    switch (this.hoveringText) {
+      case 'altText':
+        title = this.media.params.alt ? this.media.params.alt : '';
+        break;
+      case 'hoverText':
+        title = this.media.params.title ? this.media.params.title : '';
+        break;
+    }
     let path = '';
     if (this.media.params.file) { 
       path = H5P.getPath(this.media.params.file.path, this.contentId);
@@ -133,8 +142,7 @@ export class MultiMediaChoiceOption {
     image.setAttribute('src', path);
     this.content.setAttribute('aria-label', htmlDecode(alt));
     image.addEventListener('load', this.callbacks.triggerResize);
-    // Removing title as it's now used as feedback legend.
-    // this.content.setAttribute('title', htmlDecode(title));
+    this.content.setAttribute('title', htmlDecode(title));
     image.classList.add('h5p-multi-media-choice-media');
     image.setAttribute('alt', htmlDecode(alt));
 
@@ -266,6 +274,9 @@ export class MultiMediaChoiceOption {
     if (finished) {
       legends[index].classList.remove('h5p-multi-media-choice-hidden');
       legends[index].classList.add(legendVisibleClass);
+      if (this.aspectRatio !== 'auto' && !this.isSelected()) {
+        legends[index].classList.add('h5p-multi-media-choice-adjust');
+      }
     }
   }
 
