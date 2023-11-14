@@ -11,7 +11,7 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, textAlign, reportText, hoveringText, legendText, missingAltText, callbacks, toto) {
+  constructor(option, contentId, aspectRatio, singleAnswer, textAlign, reportText, hoveringText, legendText, missingAltText, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
@@ -76,16 +76,16 @@ export class MultiMediaChoiceOption {
    * @returns {string} the description of the option
    */
   getDescription() {
+    let txt = '';
     switch (this.media.library.split(' ')[0]) {
-      case 'H5P.Image':
-        let txt = '';
+      case 'H5P.Image':        
         switch (this.reportText) {
           case 'altText':
             txt = this.media.params.alt ? this.media.params.alt : '';
             break;
           case 'hoverText':
             txt = this.media.params.title ? this.media.params.title : '';
-          break;
+            break;
         }
         return txt; // Alternative text
       default:
@@ -110,8 +110,8 @@ export class MultiMediaChoiceOption {
     txt = (txt !== '') ? txt : '&nbsp;';
     const legend = document.createElement('div');
     legend.textContent = htmlDecode(txt);
-        legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
-          'h5p-multi-media-choice-legend-' + this.textAlign + '');
+    legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
+      'h5p-multi-media-choice-legend-' + this.textAlign + '');
     legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
       'h5p-multi-media-choice-legend-' + this.textAlign + '');
     return legend;

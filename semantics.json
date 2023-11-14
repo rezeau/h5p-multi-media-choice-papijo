@@ -338,28 +338,6 @@
         ]
       },
       {
-        "name": "hoveringText",
-        "type": "select",
-        "label": "For the text for hovering over images use:",
-        "importance": "low",
-        "description": "Select which text to use when hovering over the images with the mouse.",
-        "default": "noText",
-        "options": [
-          {
-            "value": "noText",
-            "label": "Do not display any text (default)."
-          },
-          {
-            "value": "altText",
-            "label": "Alternative text"
-          },
-          {
-            "value": "hoverText",
-            "label": "Hover text"
-          }
-        ]
-      },
-      {
         "name": "textAlign",
         "type": "select",
         "label": "Legends text alignment",
@@ -392,6 +370,28 @@
             }
           ]
         }
+      },
+      {
+        "name": "hoveringText",
+        "type": "select",
+        "label": "For the text for hovering over images use:",
+        "importance": "low",
+        "description": "Select which text to use when hovering over the images with the mouse.",
+        "default": "noText",
+        "options": [
+          {
+            "value": "noText",
+            "label": "Do not display any text (default)."
+          },
+          {
+            "value": "altText",
+            "label": "Alternative text"
+          },
+          {
+            "value": "hoverText",
+            "label": "Hover text"
+          }
+        ]
       },
       {
         "label": "Pass percentage",
