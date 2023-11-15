@@ -22,8 +22,8 @@
         "label": "Opción",
         "fields": [
           {
-            "label": "Medios",
-            "description": "<h3> Imaxe para mostrar como opción. O texto alternativo é usado polo informe.</h3>"
+            "label": "Media",
+            "description": "Image to display as the choice. For the use of the alternative and hover texts, see the options available at the end of the Behavioural settings below."
           },
           {
             "label": "Correcto"
@@ -135,6 +135,63 @@
             },
             {
               "label": "4"
+            }
+          ]
+        },
+        {
+          "label": "For the xAPI report use:",
+          "description": "By default Images Alternative text is used in the xAPI reports. You can use the Hover text instead.",
+          "options": [
+            {
+              "label": "Alternative text (default)"
+            },
+            {
+              "label": "Hover text"
+            }
+          ]
+        },
+        {
+          "label": "For the legend/feedback text use:",
+          "description": "Use this option to display a legend/feedback text under correctly selected images (and correctly unselected images when the activity is completed).",
+          "options": [
+            {
+              "label": "Do not display any text (default)."
+            },
+            {
+              "label": "Alternative text"
+            },
+            {
+              "label": "Hover text"
+            }
+          ]
+        },
+        {
+          "label": "Legends text alignment",
+          "description": "Select the alignment of the images legend/feedback text.",
+          "options": [
+            {
+              "label": "Left (default)"
+            },
+            {
+              "label": "Centered"
+            },
+            {
+              "label": "Justified"
+            }
+          ]
+        },
+        {
+          "label": "For the text for hovering over images use:",
+          "description": "Select which text to use when hovering over the images with the mouse.",
+          "options": [
+            {
+              "label": "Do not display any text (default)."
+            },
+            {
+              "label": "Alternative text"
+            },
+            {
+              "label": "Hover text"
             }
           ]
         },

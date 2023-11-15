@@ -23,7 +23,7 @@
         "fields": [
           {
             "label": "Média",
-            "description": "<h3> Image à afficher comme choix. Le texte alternatif est utilisé par le rapport.</h3>"
+            "description": "Image à afficher comme choix. Pour l'utilisation des textes alternatifs et de survol, voir les options disponibles à la fin des paramètres comportementaux ci-dessous."
           },
           {
             "label": "Correcte"
@@ -121,8 +121,8 @@
           ]
         },
         {
-          "label": "Nombre maximum d'alternatives par ligne",
-          "description": "Déterminer le nombre maximum d'alternatives par ligne afin d'assurer une bonne présentation des questions.",
+          "label": "Nombre maximum d'images par ligne",
+          "description": "Déterminer le nombre maximum d'images par ligne afin d'assurer une bonne présentation des questions.",
           "options": [
             {
               "label": "1"
@@ -135,6 +135,63 @@
             },
             {
               "label": "4"
+            }
+          ]
+        },
+        {
+          "label": "Pour le rapport xAPI, utiliser :",
+          "description": "Par défaut, le texte alternatif des images est utilisé dans les rapports xAPI. Vous pouvez utiliser le texte de survol à la place.",
+          "options": [
+            {
+              "label": "Texte alternatif (par défaut)"
+            },
+            {
+              "label": "Texte de survol"
+            }
+          ]
+        },
+        {
+          "label": "Pour la légende/le texte de feedback, utiliser :",
+          "description": "Cette option permet d'afficher une légende/un texte de feedback sous les images correctement sélectionnées (et correctement non sélectionnées lorsque l'activité est terminée).",
+          "options": [
+            {
+              "label": "Ne pas afficher de texte (valeur par défaut)."
+            },
+            {
+              "label": "Le texte alternatif"
+            },
+            {
+              "label": "Le texte de survol"
+            }
+          ]
+        },
+        {
+          "label": "Alignement du texte des légendes",
+          "description": "Sélectionnez l'alignement de la légende des images/du texte de feedback.",
+          "options": [
+            {
+              "label": "Alignement à gauche (par défaut)"
+            },
+            {
+              "label": "Centré"
+            },
+            {
+              "label": "Justifié"
+            }
+          ]
+        },
+        {
+          "label": "Pour le texte du survol des images, utiliser :",
+          "description": "Sélectionnez le texte à utiliser lorsque vous survolez les images avec la souris.",
+          "options": [
+            {
+              "label": "Ne pas afficher de texte (valeur par défaut)."
+            },
+            {
+              "label": "Le texte alternatif"
+            },
+            {
+              "label": "Le texte de survol"
             }
           ]
         },
