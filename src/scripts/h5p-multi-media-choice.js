@@ -84,6 +84,8 @@ export default class MultiMediaChoice extends H5P.Question {
       this.addButtons();
 
       this.on('resize', () => this.content.setColumnProperties());
+      this.trigger('resize');
+
     };
 
     /**
@@ -150,6 +152,7 @@ export default class MultiMediaChoice extends H5P.Question {
           this.content.isPassed()
         )
       );
+      this.trigger('resize'); // Needed if integrated into interactive book!
     };
 
     /**
@@ -191,6 +194,7 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('show-solution');
       this.content.hideSolutions();
       this.removeFeedback();
+      this.content.hideLegends();
     };
 
     /**

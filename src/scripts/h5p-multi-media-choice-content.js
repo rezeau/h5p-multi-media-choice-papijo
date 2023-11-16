@@ -288,6 +288,13 @@ export default class MultiMediaChoiceContent {
   }
 
   /**
+   * Hide the legends / feedback
+   */
+  hideLegends() {
+    this.options.forEach(option => option.hideLegend());
+  }
+
+  /**
    * Toggles the given option. If the options are radio buttons
    * the previously checked one is unchecked
    * @param {number} optionIndex Which option is being selected
@@ -322,7 +329,6 @@ export default class MultiMediaChoiceContent {
   resetSelections() {
     this.lastSelectedRadioButtonOption = null;
     this.setTabIndexes();
-    const legends =  document.getElementsByClassName('h5p-multi-media-choice-legend');
     let legendVisibleClass = 'h5p-multi-media-choice-legend-visible';
     if (this.aspectRatio !== 'auto') {
       legendVisibleClass += '-ratio';
@@ -330,8 +336,8 @@ export default class MultiMediaChoiceContent {
     this.options.forEach((option, index) => {
       option.uncheck();
       option.enable();
-      legends[index].classList.remove(legendVisibleClass);
-      legends[index].classList.add('h5p-multi-media-choice-hidden');
+      option.legend.classList.remove(legendVisibleClass);
+      option.legend.classList.add('h5p-multi-media-choice-hidden');
     });
   }
 

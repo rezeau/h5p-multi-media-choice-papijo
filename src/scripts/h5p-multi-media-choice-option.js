@@ -108,13 +108,11 @@ export class MultiMediaChoiceOption {
         break;
     }
     txt = (txt !== '') ? txt : '&nbsp;';
-    const legend = document.createElement('div');
-    legend.textContent = htmlDecode(txt);
-    legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
+    this.legend = document.createElement('div');
+    this.legend.textContent = htmlDecode(txt);
+    this.legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
       'h5p-multi-media-choice-legend-' + this.textAlign + '');
-    legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
-      'h5p-multi-media-choice-legend-' + this.textAlign + '');
-    return legend;
+    return this.legend;
   }
 
   /**
@@ -140,8 +138,7 @@ export class MultiMediaChoiceOption {
 
     const image = document.createElement('img');
     image.setAttribute('src', path);
-    this.content.setAttribute('aria-label', htmlDecode(alt));
-    image.addEventListener('load', this.callbacks.triggerResize);
+    this.content.setAttribute('aria-label', htmlDecode(alt));    
     this.content.setAttribute('title', htmlDecode(title));
     image.classList.add('h5p-multi-media-choice-media');
     image.setAttribute('alt', htmlDecode(alt));
@@ -256,14 +253,13 @@ export class MultiMediaChoiceOption {
       legendVisibleClass += '-ratio';
     }
     this.wrapper.classList.remove('h5p-multi-media-choice-selected');
-    const legends =  document.getElementsByClassName('h5p-multi-media-choice-legend');
     if (this.isSelected()) {
       if (this.correct) {
         this.wrapper.classList.add('h5p-multi-media-choice-correct');
         this.addAccessibilitySolutionText(correctAnswer);
         // Display the legends of the correctly selected images.
-        legends[index].classList.add(legendVisibleClass);
-        legends[index].classList.remove('h5p-multi-media-choice-hidden');
+        this.legend.classList.add(legendVisibleClass);
+        this.legend.classList.remove('h5p-multi-media-choice-hidden');
       }
       else {
         this.wrapper.classList.add('h5p-multi-media-choice-wrong');
@@ -272,10 +268,10 @@ export class MultiMediaChoiceOption {
     }
     // If activity is finished, also display the legends for the non-selectable images.
     if (finished) {
-      legends[index].classList.remove('h5p-multi-media-choice-hidden');
-      legends[index].classList.add(legendVisibleClass);
+      this.legend.classList.remove('h5p-multi-media-choice-hidden');
+      this.legend.classList.add(legendVisibleClass);
       if (this.aspectRatio !== 'auto' && !this.isSelected()) {
-        legends[index].classList.add('h5p-multi-media-choice-adjust');
+        this.legend.classList.add('h5p-multi-media-choice-adjust');
       }
     }
   }
@@ -319,6 +315,12 @@ export class MultiMediaChoiceOption {
     }
   }
 
+  /**
+   * Hides any information about legends/feedback in the UI and screen reader
+   */
+  hideLegend() {
+    this.legend.classList.remove('h5p-multi-media-choice-correct');    
+  }
   /**
    * Handlers for pressed keys on options
    * @param {HTMLElement} content Option HTML element
