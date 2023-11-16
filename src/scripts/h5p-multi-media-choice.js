@@ -152,7 +152,10 @@ export default class MultiMediaChoice extends H5P.Question {
           this.content.isPassed()
         )
       );
-      this.trigger('resize'); // Needed if integrated into interactive book!
+      // Needed if integrated into interactive book.
+      if (!this.isRoot()) {
+        this.trigger('resize');
+      }
     };
 
     /**

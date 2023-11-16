@@ -333,7 +333,7 @@ export default class MultiMediaChoiceContent {
     if (this.aspectRatio !== 'auto') {
       legendVisibleClass += '-ratio';
     }
-    this.options.forEach((option, index) => {
+    this.options.forEach(option => {
       option.uncheck();
       option.enable();
       option.legend.classList.remove(legendVisibleClass);

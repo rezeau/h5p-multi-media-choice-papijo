@@ -138,7 +138,8 @@ export class MultiMediaChoiceOption {
 
     const image = document.createElement('img');
     image.setAttribute('src', path);
-    this.content.setAttribute('aria-label', htmlDecode(alt));    
+    this.content.setAttribute('aria-label', htmlDecode(alt));
+    image.addEventListener('load', this.callbacks.triggerResize);
     this.content.setAttribute('title', htmlDecode(title));
     image.classList.add('h5p-multi-media-choice-media');
     image.setAttribute('alt', htmlDecode(alt));
@@ -247,7 +248,7 @@ export class MultiMediaChoiceOption {
   /**
    * Shows if the answer selected is correct or wrong in the UI and screen reader if selected
    */
-  showSelectedSolution({ index, finished, correctAnswer, wrongAnswer }) {
+  showSelectedSolution({finished, correctAnswer, wrongAnswer }) {
     let legendVisibleClass = 'h5p-multi-media-choice-legend-visible';
     if (this.aspectRatio !== 'auto') {
       legendVisibleClass += '-ratio';
