@@ -33,12 +33,7 @@ export default class MultiMediaChoiceContent {
 
     this.aspectRatio = this.params.behaviour.aspectRatio;
     this.shuffleImages = this.params.behaviour.shuffleImages;
-    
-    this.textAlign = this.params.behaviour.textAlign;
     this.lastSelectedRadioButtonOption = null;
-    this.reportText = this.params.behaviour.reportText;
-    this.hoveringText = this.params.behaviour.hoveringText;
-    this.legendText = this.params.behaviour.legendText;
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
 
@@ -80,18 +75,15 @@ export default class MultiMediaChoiceContent {
             option,
             contentId,
             this.aspectRatio,
-            this.isSingleAnswer,
-            this.textAlign,
-            this.reportText,
-            this.hoveringText,
-            this.legendText,
+            this.isSingleAnswer,            
             this.params.l10n.missingAltText,
             {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),
               onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
               triggerResize: this.callbacks.triggerResize
-            }
+            },
+            this.legendDescription
           )
           
       )

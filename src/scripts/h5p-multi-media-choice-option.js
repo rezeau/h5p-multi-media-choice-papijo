@@ -11,23 +11,19 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, textAlign, reportText, hoveringText, legendText, missingAltText, callbacks) {
+  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
     this.missingAltText = missingAltText;
-    this.textAlign = textAlign;
     this.media = option.media;
     this.correct = option.correct;
-
+    this.legendDescription = option.legendDescription;
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
     this.callbacks.onKeyboardArrowKey = this.callbacks.onKeyboardArrowKey || (() => {});
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
-    this.reportText = reportText;
-    this.hoveringText = hoveringText;
-    this.legendText = legendText;
     this.content = document.createElement('li');
     this.content.classList.add('h5p-multi-media-choice-list-item');
     this.wrapper = document.createElement('div');
@@ -76,18 +72,9 @@ export class MultiMediaChoiceOption {
    * @returns {string} the description of the option
    */
   getDescription() {
-    let txt = '';
     switch (this.media.library.split(' ')[0]) {
-      case 'H5P.Image':        
-        switch (this.reportText) {
-          case 'altText':
-            txt = this.media.params.alt ? this.media.params.alt : '';
-            break;
-          case 'hoverText':
-            txt = this.media.params.title ? this.media.params.title : '';
-            break;
-        }
-        return txt; // Alternative text
+      case 'H5P.Image':
+        return this.media.params.alt || this.missingAltText; // Alternative text
       default:
         return '';
     }
@@ -98,20 +85,25 @@ export class MultiMediaChoiceOption {
    * @returns {HTMLElement} legend tag.
    */
   buildLegend() {
-    let txt = '';
-    switch (this.legendText) {
-      case 'altText':
-        txt = this.media.params.alt ? this.media.params.alt : '';
-        break;
-      case 'hoverText':
-        txt = this.media.params.title ? this.media.params.title : '';
-        break;
-    }
-    txt = (txt !== '') ? txt : '&nbsp;';
     this.legend = document.createElement('div');
-    this.legend.textContent = htmlDecode(txt);
+    /*
+    let htmlText = "<p>text here</p>";
+    let div = document.createElement("div");
+    div.innerHTML = htmlText;
+    let textWithoutPTag = div.textContent || div.innerText || "";
+    console.log(textWithoutPTag);
+
+    
+    console.log(this.legendDescription);
+    let textWithoutPTag = this.legend.textContent || this.legend.innerText || "";
+    console.log(textWithoutPTag);
+    */
+    
+    let textWithoutPTag = this.legendDescription.replace(/<\/?p>/g, '');
+    this.legend.innerHTML = textWithoutPTag;
+    
     this.legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
-      'h5p-multi-media-choice-legend-' + this.textAlign + '');
+      'h5p-multi-media-choice-legend-');
     return this.legend;
   }
 
@@ -121,16 +113,8 @@ export class MultiMediaChoiceOption {
    */
   buildImage() {
     const alt = this.media.params.alt ? this.media.params.alt : '';
-    // const title = this.media.params.title ? this.media.params.title : '';
-    let title = '';
-    switch (this.hoveringText) {
-      case 'altText':
-        title = this.media.params.alt ? this.media.params.alt : '';
-        break;
-      case 'hoverText':
-        title = this.media.params.title ? this.media.params.title : '';
-        break;
-    }
+    const title = this.media.params.title ? this.media.params.title : '';
+
     let path = '';
     if (this.media.params.file) { 
       path = H5P.getPath(this.media.params.file.path, this.contentId);
