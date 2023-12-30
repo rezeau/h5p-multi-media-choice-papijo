@@ -48,7 +48,7 @@ export class MultiMediaChoiceOption {
     this.wrapper.appendChild(this.buildLegend(this.option));
     
     this.$wrapper = H5P.jQuery(this.wrapper);
-    const $tip = H5P.JoubelUI.createTip('tip', {
+    const $tip = H5P.JoubelUI.createTip(option.tip, {
               tipLabel: 'self.params.tipButtonLabel',
               addclass: ''
             });
