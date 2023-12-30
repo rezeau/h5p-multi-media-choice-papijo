@@ -7,6 +7,7 @@ import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-
  * Class for H5P Multi Media Choice.
  */
 export default class MultiMediaChoice extends H5P.Question {
+  
   /**
    * @constructor
    * @param {object} params Parameters passed by the editor.
@@ -47,7 +48,7 @@ export default class MultiMediaChoice extends H5P.Question {
           if (media.params.file) {
             this.setImage(media.params.file.path, {
               disableImageZooming: params.media.disableImageZooming || false,
-              alt: media.params.alt,             
+              alt: media.params.alt,
               title: media.params.title,
               expandImage: media.params.expandImage,
               minimizeImage: media.params.minimizeImage
@@ -74,7 +75,7 @@ export default class MultiMediaChoice extends H5P.Question {
         this.introduction.innerHTML = this.params.question;
         this.introduction.setAttribute('id', `h5p-media-choice${contentId}`);
         // papijo removed 2 lines throwing error, what is this div for?
-        // const div = document.createElement('img');        
+        // const div = document.createElement('img');
         // div.src = this.getLibraryFilePath('assets/placeholder1to1.svg');
         this.setIntroduction(this.introduction);
       }

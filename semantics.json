@@ -102,6 +102,13 @@
           }
         },
         {
+          "name": "tip",
+          "type": "text",
+          "importance": "high",
+          "optional": true,
+          "label": "Tip"
+        },
+        {
           "name": "correct",
           "type": "boolean",
           "label": "Correct",
