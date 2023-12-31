@@ -140,7 +140,7 @@ export default class MultiMediaChoice extends H5P.Question {
       }
 
       this.hideButton('check-answer');
-
+      this.showTips();
       this.content.showSelectedSolutions();
 
       this.trigger(
@@ -197,10 +197,11 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('try-again');
       this.hideButton('show-solution');
       this.content.hideSolutions();
-      this.removeFeedback();
       this.content.hideLegends();
+      this.showTips();
     };
 
+  
     /**
      * Get answer given
      * Contract.
@@ -213,6 +214,13 @@ export default class MultiMediaChoice extends H5P.Question {
     };
   }
 
+  showTips() {
+    const tips = document.getElementsByClassName("joubel-icon-tip-normal"); 
+    for (const element of tips) {
+      element.classList.toggle("h5p-multi-media-choice-hidden");
+    }
+    return;
+  }
   /**
    * Add the buttons that are passed to H5P.Question
    */

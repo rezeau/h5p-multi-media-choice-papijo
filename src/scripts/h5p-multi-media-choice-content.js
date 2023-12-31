@@ -75,15 +75,14 @@ export default class MultiMediaChoiceContent {
             option,
             contentId,
             this.aspectRatio,
-            this.isSingleAnswer,            
+            this.isSingleAnswer,
             this.params.l10n.missingAltText,
             {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),
               onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
               triggerResize: this.callbacks.triggerResize
-            },
-            this.legendDescription
+            }
           )
           
       )
@@ -242,7 +241,6 @@ export default class MultiMediaChoiceContent {
         wrongAnswer: this.params.l10n.wrongAnswer
       })
     );
-    
   }
 
   /**
@@ -294,6 +292,28 @@ export default class MultiMediaChoiceContent {
    */
   toggleSelected(optionIndex, triggerInteracted = true) {
     const option = this.options[optionIndex];
+    
+console.log(JSON.stringify(option.tip, undefined, 4));
+    const tips = document.getElementsByClassName("joubel-tip-container");
+    let isTipShown = false;
+    let ariaExpandedValue;
+    for (let index = 0; index < tips.length; index++) {
+      const element = tips[index];
+      // Get the value of the aria-expanded attribute
+      ariaExpandedValue = element.getAttribute('aria-expanded');
+      if (ariaExpandedValue) {
+        isTipShown = true;
+        index = tips.length;
+        //break;
+      }
+      //if (isTipShown === true) {
+        //break;
+      //}
+    }
+    console.log('isTipShown = ' + isTipShown);
+    if (isTipShown === true) {
+      return;
+    }
     if (option.isDisabled()) {
       return;
     }

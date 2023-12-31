@@ -48,7 +48,8 @@ export class Util {
             cancelLabel: 'Cancel',
             confirmLabel: 'Retry'
           },
-          missingAltText: 'Alt text missing'
+          missingAltText: 'Alt text missing',
+          tipButtonLabel: 'Show tip'
         }
       },
       params

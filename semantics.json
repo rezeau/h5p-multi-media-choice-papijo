@@ -536,6 +536,13 @@
         "name": "missingAltText",
         "type": "text",
         "default": "Alt text missing"
+      },
+      {
+        "label": "Text for show tip",
+        "importance": "low",
+        "name": "tipButtonLabel",
+        "type": "text",
+        "default": "Show tip"
       }
     ]
   }
