@@ -7,7 +7,7 @@ import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-
  * Class for H5P Multi Media Choice.
  */
 export default class MultiMediaChoice extends H5P.Question {
-  
+
   /**
    * @constructor
    * @param {object} params Parameters passed by the editor.
@@ -24,7 +24,6 @@ export default class MultiMediaChoice extends H5P.Question {
 
     // Default values are extended
     this.params = Util.extendParams(params);
-
     this.content = new MultiMediaChoiceContent(
       this.params,
       contentId,
@@ -198,10 +197,9 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('show-solution');
       this.content.hideSolutions();
       this.content.hideLegends();
-      this.showTips();
+      this.showTips(true);
     };
 
-  
     /**
      * Get answer given
      * Contract.
@@ -215,7 +213,7 @@ export default class MultiMediaChoice extends H5P.Question {
   }
 
   showTips() {
-    const tips = document.getElementsByClassName("joubel-icon-tip-normal"); 
+    const tips = document.getElementsByClassName("joubel-icon-tip-normal");
     for (const element of tips) {
       element.classList.toggle("h5p-multi-media-choice-hidden");
     }

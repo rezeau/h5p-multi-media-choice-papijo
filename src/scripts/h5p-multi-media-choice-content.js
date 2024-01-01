@@ -77,6 +77,7 @@ export default class MultiMediaChoiceContent {
             this.aspectRatio,
             this.isSingleAnswer,
             this.params.l10n.missingAltText,
+            this.params.l10n.tipButtonLabel,
             {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),
@@ -84,7 +85,6 @@ export default class MultiMediaChoiceContent {
               triggerResize: this.callbacks.triggerResize
             }
           )
-          
       )
       : [];
     this.optionList = this.buildOptionList(this.options);
@@ -175,7 +175,6 @@ export default class MultiMediaChoiceContent {
 
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
     let score = 0;
-    
     this.options.forEach(option => {
       if (option.isSelected()) {
         option.isCorrect() ? score++ : score--;
@@ -291,32 +290,28 @@ export default class MultiMediaChoiceContent {
    * @param {bool} triggerInteracted Trigger xAPI or not.
    */
   toggleSelected(optionIndex, triggerInteracted = true) {
-    const option = this.options[optionIndex];
-    
-console.log(JSON.stringify(option.tip, undefined, 4));
+    // Routine for giving tip clicked precedence over image clicked.
+    // If any tip has been clicked and is expanded, return...
     const tips = document.getElementsByClassName("joubel-tip-container");
     let isTipShown = false;
-    let ariaExpandedValue;
+    let ariaExpandedValue = false;
     for (let index = 0; index < tips.length; index++) {
       const element = tips[index];
       // Get the value of the aria-expanded attribute
-      ariaExpandedValue = element.getAttribute('aria-expanded');
+      ariaExpandedValue = (element.getAttribute('aria-expanded') === 'true');
       if (ariaExpandedValue) {
         isTipShown = true;
+        // Quit the for... loop!
         index = tips.length;
-        //break;
+        // Needed for a good reason but can't remember why.
+        element.setAttribute('aria-expanded', 'false');
       }
-      //if (isTipShown === true) {
-        //break;
-      //}
     }
-    console.log('isTipShown = ' + isTipShown);
-    if (isTipShown === true) {
+    const option = this.options[optionIndex];
+    if (option.isDisabled() || isTipShown) {
       return;
     }
-    if (option.isDisabled()) {
-      return;
-    }
+
     if (this.isSingleAnswer) {
       if (option.isSelected()) {
         return; // Disables unchecking radio buttons

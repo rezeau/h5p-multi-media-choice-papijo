@@ -1,6 +1,5 @@
 import { htmlDecode } from "./h5p-multi-media-choice-util";
 import { Util } from './h5p-multi-media-choice-util';
-const JoubelUI = H5P.JoubelUI;
 
 /** Class representing a multi media option */
 export class MultiMediaChoiceOption {
@@ -13,7 +12,7 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, callbacks, params) {
+  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, tipButtonLabel, callbacks, params) {
     this.params = Util.extendParams(params);
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
@@ -22,8 +21,7 @@ export class MultiMediaChoiceOption {
     this.media = option.media;
     this.correct = option.correct;
     this.legendDescription = option.legendDescription;
-    this.tip = option.tip,
-    this.tipButtonLabel = this.params.l10n.tipButtonLabel,
+    this.tipButtonLabel = tipButtonLabel;
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
@@ -33,9 +31,7 @@ export class MultiMediaChoiceOption {
     this.content.classList.add('h5p-multi-media-choice-list-item');
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('h5p-multi-media-choice-option');
-    
     this.content.appendChild(this.wrapper);
-
     if (singleAnswer) {
       this.content.setAttribute('role', 'radio');
     }
@@ -48,17 +44,17 @@ export class MultiMediaChoiceOption {
     const mediaContent = this.createMediaContent();
     this.wrapper.appendChild(mediaContent);
     this.wrapper.appendChild(this.buildLegend(this.option));
-    
     this.$wrapper = H5P.jQuery(this.wrapper);
     if (option.tip) {
       const $tip = H5P.JoubelUI.createTip(option.tip, {
-        });
+      });
         // Create wrapper for tip. Use span or div.
-        H5P.jQuery('<div/>', {
-          'aria-label': this.tipButtonLabel,
-          'append': $tip,
-          'appendTo': this.$wrapper
-        });
+      H5P.jQuery('<div/>', {
+        'aria-label': this.tipButtonLabel,
+        'title': this.tipButtonLabel,
+        'append': $tip,
+        'appendTo': this.$wrapper
+      });
     }
     this.addKeyboardHandlers();
   }
@@ -104,8 +100,7 @@ export class MultiMediaChoiceOption {
     this.legend = document.createElement('div');
     let textWithoutPTag = this.legendDescription.replace(/<\/?p>/g, '');
     this.legend.innerHTML = textWithoutPTag;
-    
-    this.legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden', 
+    this.legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden',
       'h5p-multi-media-choice-legend-');
     return this.legend;
   }
@@ -116,17 +111,16 @@ export class MultiMediaChoiceOption {
    */
   buildTip() {
     const $tip = H5P.JoubelUI.createTip('tip', {
-              tipLabel: 'self.params.tipButtonLabel',
-              addclass: ''
-            });
-            if ($tip instanceof H5P.jQuery) {
+      tipLabel: 'self.params.tipButtonLabel',
+      addclass: ''
+    });
+    if ($tip instanceof H5P.jQuery) {
       // Create wrapper for tip
-      $('<span/>', {
+      H5P.JoubelUI('<span/>', {
         'class': '',
         'append': $tip
       });
     }
-//    return $tip;
   }
 
   /**
@@ -138,7 +132,7 @@ export class MultiMediaChoiceOption {
     const title = this.media.params.title ? this.media.params.title : '';
 
     let path = '';
-    if (this.media.params.file) { 
+    if (this.media.params.file) {
       path = H5P.getPath(this.media.params.file.path, this.contentId);
     }
 
@@ -255,13 +249,10 @@ export class MultiMediaChoiceOption {
    * Shows if the answer selected is correct or wrong in the UI and screen reader if selected
    */
   showSelectedSolution({finished, correctAnswer, wrongAnswer }) {
-    
-    
     let legendVisibleClass = 'h5p-multi-media-choice-legend-visible';
     if (this.aspectRatio !== 'auto') {
       legendVisibleClass += '-ratio';
     }
-    
     this.wrapper.classList.remove('h5p-multi-media-choice-selected');
     if (this.isSelected()) {
       if (this.correct) {
@@ -329,12 +320,9 @@ export class MultiMediaChoiceOption {
    * Hides any information about legends/feedback in the UI and screen reader
    */
   hideLegend() {
-    this.legend.classList.remove('h5p-multi-media-choice-correct');    
+    this.legend.classList.remove('h5p-multi-media-choice-correct');
   }
-  
-  hideTip() {
-    this.tip.classList.add('h5p-multi-media-choice-hidden');    
-  }
+
   /**
    * Handlers for pressed keys on options
    * @param {HTMLElement} content Option HTML element
