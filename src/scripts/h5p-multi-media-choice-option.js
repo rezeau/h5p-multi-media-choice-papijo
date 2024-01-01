@@ -1,5 +1,5 @@
 import { htmlDecode } from "./h5p-multi-media-choice-util";
-import { Util } from './h5p-multi-media-choice-util';
+//import { Util } from './h5p-multi-media-choice-util';
 
 /** Class representing a multi media option */
 export class MultiMediaChoiceOption {
@@ -12,8 +12,7 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, tipButtonLabel, callbacks, params) {
-    this.params = Util.extendParams(params);
+  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, tipButtonLabel, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
@@ -103,24 +102,6 @@ export class MultiMediaChoiceOption {
     this.legend.classList.add('h5p-multi-media-choice-legend', 'h5p-multi-media-choice-hidden',
       'h5p-multi-media-choice-legend-');
     return this.legend;
-  }
-
-  /**
-   * Builds a feedback tip from from media
-   * @returns {HTMLElement} tip tag.
-   */
-  buildTip() {
-    const $tip = H5P.JoubelUI.createTip('tip', {
-      tipLabel: 'self.params.tipButtonLabel',
-      addclass: ''
-    });
-    if ($tip instanceof H5P.jQuery) {
-      // Create wrapper for tip
-      H5P.JoubelUI('<span/>', {
-        'class': '',
-        'append': $tip
-      });
-    }
   }
 
   /**
