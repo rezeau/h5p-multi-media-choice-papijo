@@ -248,6 +248,14 @@
         }
       },
       {
+        "label": "Require that all answers are correct before the legends can be viewed",
+        "importance": "low",
+        "name": "showLegendsRequiresAllCorrect",
+        "type": "boolean",
+        "default": true,
+        "optional": true
+      },
+      {
         "name": "questionType",
         "type": "select",
         "label": "Question Type",

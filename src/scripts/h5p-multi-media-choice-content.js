@@ -21,6 +21,7 @@ export default class MultiMediaChoiceContent {
     this.callbacks.triggerResize = this.callbacks.triggerResize || (() => {});
     this.callbacks.triggerInteracted = this.callbacks.triggerInteracted || (() => {});
     this.maxAlternativesPerRow = this.params.behaviour.maxAlternativesPerRow;
+    this.showLegendsRequiresAllCorrect = this.params.behaviour.showLegendsRequiresAllCorrect;
 
     this.numberOfCorrectOptions = params.options
       ? params.options.filter(option => option.correct).length
@@ -76,6 +77,7 @@ export default class MultiMediaChoiceContent {
             contentId,
             this.aspectRatio,
             this.isSingleAnswer,
+            this.showLegendsRequiresAllCorrect,
             this.params.l10n.missingAltText,
             this.params.l10n.tipButtonLabel,
             {
@@ -236,6 +238,7 @@ export default class MultiMediaChoiceContent {
       option.showSelectedSolution({
         index,
         finished: this.isPassed(),
+        showLegendsRequiresAllCorrect: this.params.behaviour.showLegendsRequiresAllCorrect,
         correctAnswer: this.params.l10n.correctAnswer,
         wrongAnswer: this.params.l10n.wrongAnswer
       })

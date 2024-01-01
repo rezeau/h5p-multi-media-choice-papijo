@@ -12,7 +12,7 @@ export class MultiMediaChoiceOption {
    * @param {boolean} assetsFilePath //TODO: what is this?
    * @param {object} [callbacks = {}] Callbacks.
    */
-  constructor(option, contentId, aspectRatio, singleAnswer, missingAltText, tipButtonLabel, callbacks) {
+  constructor(option, contentId, aspectRatio, singleAnswer, showLegendsRequiresAllCorrect, missingAltText, tipButtonLabel, callbacks) {
     this.contentId = contentId;
     this.aspectRatio = aspectRatio;
     this.singleAnswer = singleAnswer;
@@ -21,6 +21,7 @@ export class MultiMediaChoiceOption {
     this.correct = option.correct;
     this.legendDescription = option.legendDescription;
     this.tipButtonLabel = tipButtonLabel;
+    this.showLegendsRequiresAllCorrect = showLegendsRequiresAllCorrect;
     this.callbacks = callbacks || {};
     this.callbacks.onClick = this.callbacks.onClick || (() => {});
     this.callbacks.onKeyboardSelect = this.callbacks.onKeyboardSelect || (() => {});
@@ -229,7 +230,7 @@ export class MultiMediaChoiceOption {
   /**
    * Shows if the answer selected is correct or wrong in the UI and screen reader if selected
    */
-  showSelectedSolution({finished, correctAnswer, wrongAnswer }) {
+  showSelectedSolution({finished, showLegendsRequiresAllCorrect, correctAnswer, wrongAnswer }) {
     let legendVisibleClass = 'h5p-multi-media-choice-legend-visible';
     if (this.aspectRatio !== 'auto') {
       legendVisibleClass += '-ratio';
@@ -240,8 +241,10 @@ export class MultiMediaChoiceOption {
         this.wrapper.classList.add('h5p-multi-media-choice-correct');
         this.addAccessibilitySolutionText(correctAnswer);
         // Display the legends of the correctly selected images.
-        this.legend.classList.add(legendVisibleClass);
-        this.legend.classList.remove('h5p-multi-media-choice-hidden');
+        if (!showLegendsRequiresAllCorrect) {
+          this.legend.classList.add(legendVisibleClass);
+          this.legend.classList.remove('h5p-multi-media-choice-hidden');
+        }
       }
       else {
         this.wrapper.classList.add('h5p-multi-media-choice-wrong');
