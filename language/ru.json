@@ -30,6 +30,9 @@
           },
           {
             "label": "Правильно"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Требуется ответ перед просмотром решения"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "Тип вопроса",
@@ -248,6 +254,10 @@
         {
           "label": "Текст, если для изображения отсутствует замещающий текст",
           "default": "Отсутствует альтернативный текст"
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }

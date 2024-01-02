@@ -30,6 +30,9 @@
           },
           {
             "label": "Correcte"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Une réponse est requise avant de pouvoir consulter la solution"
+        },
+        {
+          "label": "Exiger que toutes les réponses soient correctes avant d'afficher les légendes."
         },
         {
           "label": "Type de question",
@@ -248,6 +254,10 @@
         {
           "label": "Texte si le texte alternatif est manquant pour une image",
           "default": "Texte Alt manquant"
+        },
+        {
+          "label": "Texte pour « Afficher l'indice »",
+          "default": "Afficher l'indice"
         }
       ]
     }

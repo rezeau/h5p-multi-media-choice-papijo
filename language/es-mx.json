@@ -30,6 +30,9 @@
           },
           {
             "label": "Correcto"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Requerir respuesta antes de que se pueda ver la solución"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "Tipo de Pregunta",
@@ -248,6 +254,10 @@
         {
           "label": "Texto si faltara el texto alterno para una imagen",
           "default": "Falta el texto alterno"
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }

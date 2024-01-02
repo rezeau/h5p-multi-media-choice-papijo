@@ -30,6 +30,9 @@
           },
           {
             "label": "Sahihi"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Hitaji jibu kabla ya suluhisho kutazamwa"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "Aina ya Swali",
@@ -248,6 +254,10 @@
         {
           "label": "Maandishi ikiwa maandishi mbadala hayapo kwa picha",
           "default": "Maandishi mbadala hayapo"
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }

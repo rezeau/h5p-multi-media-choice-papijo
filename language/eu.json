@@ -30,6 +30,9 @@
           },
           {
             "label": "Zuzena"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Behartu erantzutera emaitza ikusi ahal izan aurretik"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "Galdera-mota",
@@ -248,6 +254,10 @@
         {
           "label": "Testua irudiaren ordezko testua falta bada",
           "default": "Ordezko testua falta da"
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }

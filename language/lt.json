@@ -30,6 +30,9 @@
           },
           {
             "label": "Teisingai"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Require answer before the solution can be viewed"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "Klausimo tipas",
@@ -248,6 +254,10 @@
         {
           "label": "Text if alt text is missing for an image",
           "default": "Alt text missing"
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }

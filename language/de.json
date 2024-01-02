@@ -30,6 +30,9 @@
           },
           {
             "label": "Richtig"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Lösung wird erst angezeigt, wenn eine Antwort eingegeben wurde"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "Frageart",
@@ -248,6 +254,10 @@
         {
           "label": "Text, der benutzt wird, falls kein Alternativtext für ein Bild angegeben wird",
           "default": "Kein Alternativtext angegeben"
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }

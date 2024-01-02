@@ -30,6 +30,9 @@
           },
           {
             "label": "Тачно"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Захтевајте одговор пре него што се решење види"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "Тип питања",
@@ -248,6 +254,10 @@
         {
           "label": "Текст ако за слику недостаје алтернативни текст",
           "default": "Недостаје алтернативни текст."
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }

@@ -30,6 +30,9 @@
           },
           {
             "label": "Pareizi"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "Pieprasīt atbildi pirms atļauts skatīt risinājumu"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "Jautājuma veids",
@@ -248,6 +254,10 @@
         {
           "label": "Teksts, ja attēlam trūkst alternatīvā teksta",
           "default": "Trūkst alternatīvā teksta"
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }

@@ -30,6 +30,9 @@
           },
           {
             "label": "정답"
+          },
+          {
+            "label": "Correct"
           }
         ]
       }
@@ -86,6 +89,9 @@
         },
         {
           "label": "해답을 보기 전에 답변 필요"
+        },
+        {
+          "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
           "label": "문제유형",
@@ -248,6 +254,10 @@
         {
           "label": "이미지에 대한 대체 텍스트가 누락된 경우의 텍스트",
           "default": "대체 텍스트가 누락되었습니다."
+        },
+        {
+          "label": "Text for show tip",
+          "default": "Show tip"
         }
       ]
     }
