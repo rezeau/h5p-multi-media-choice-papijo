@@ -35,6 +35,8 @@ export class Util {
           noAnswer: 'Please answer before viewing the solution',
           retryText: 'Retry',
           retry: 'Retry the task. Reset all responses and start the task over again.',
+          resetText: 'Reset',
+          reset: 'Reset the task after completion.',
           result: 'You got :num out of :total points',
           confirmCheck: {
             header: 'Finish?',

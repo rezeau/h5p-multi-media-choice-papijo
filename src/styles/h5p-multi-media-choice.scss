@@ -1,4 +1,4 @@
-@use './colors' as *;
+﻿@use './colors' as *;
 @use './mixins' as *;
 @use './sizes' as *;
 @use 'sass:math';
@@ -207,8 +207,11 @@
     top: -25px;
     right: 5px;
   }
-  .toto {
-    display: none;
-  }
-}
 
+  .h5p-multi-media-choice-reset::before {
+    font-family: 'H5PFontAwesome4';
+    padding-right: 0.5em;
+    content: "\F021";
+  }
+  
+}

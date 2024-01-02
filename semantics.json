@@ -262,6 +262,15 @@
         "optional": true
       },
       {
+        "name": "enableReset",
+        "label": "Enable \"Reset\"",
+        "type": "boolean",
+        "importance": "low",
+        "default": false,
+        "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!",
+        "optional": true
+      },
+      {
         "name": "questionType",
         "type": "select",
         "label": "Question Type",
@@ -443,6 +452,20 @@
         "label": "Assistive technology description for \"Retry\" button",
         "importance": "low",
         "default": "Retry the task. Reset all responses and start the task over again."
+      },
+      {
+        "name": "resetText",
+        "type": "text",
+        "label": "Text for \"Reset\" button",
+        "importance": "low",
+        "default": "Reset"
+      },
+      {
+        "name": "reset",
+        "type": "text",
+        "label": "Assistive technology description for \"Reset\" button",
+        "importance": "low",
+        "default": "Reset the task after completion."
       },
       {
         "name": "result",

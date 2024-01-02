@@ -156,6 +156,24 @@ export default class MultiMediaChoice extends H5P.Question {
       if (!this.isRoot()) {
         this.trigger('resize');
       }
+
+      // Do not enable Reset if this multi-media-choice activity is inserted inside an interactive book.
+      if (this.isRoot() && this.params.behaviour.enableReset && score === maxScore) {
+        this.showButton('reset-activity');
+      }
+    };
+
+
+    /**
+     * Resets options, buttons and solutions
+     *
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
+     */
+    this.resetActivity = () => {
+      // Display reset button to enable user to do the task again.
+      // Provided a warning in the semantics file as to this method not guaranteed to work at all times!
+      const url = top.location.href;
+      window.top.location.href = url;
     };
 
     /**
@@ -262,13 +280,29 @@ export default class MultiMediaChoice extends H5P.Question {
         this.resetTask();
       },
       false,
-      { 'aria-label': this.params.l10n.retry },
+      { 'aria-label': this.params.l10n.retryText,
+        title: this.params.l10n.retry
+      },
       {
         confirmationDialog: {
           enable: this.params.behaviour.confirmRetryDialog,
           l10n: this.params.l10n.confirmRetry,
           instance: this
         }
+      }
+    );
+
+    this.addButton(
+      'reset-activity',
+      this.params.l10n.resetText,
+      () => {
+        this.resetActivity();
+      },
+      false,
+      {
+        'aria-label': this.params.l10n.reset,
+        title: this.params.l10n.reset,
+        class: 'h5p-multi-media-choice-reset'
       }
     );
   }
