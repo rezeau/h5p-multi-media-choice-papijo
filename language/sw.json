@@ -98,6 +98,10 @@
           "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
+          "label": "Enable \"Reset\"",
+          "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!"
+        },
+        {
           "label": "Aina ya Swali",
           "description": "Chagua mwonekano na tabia ya swali.",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "Maelezo ya teknolojia ya usaidizi kwa kitufe cha \"Jaribu tena\"",
           "default": "Jaribu tena kazi hiyo. Weka upya majibu yote na uanze kazi tena."
+        },
+        {
+          "label": "Text for \"Reset\" button",
+          "default": "Reset"
+        },
+        {
+          "label": "Assistive technology description for \"Reset\" button",
+          "default": "Reset the task after completion."
         },
         {
           "label": "Matokeo yako",

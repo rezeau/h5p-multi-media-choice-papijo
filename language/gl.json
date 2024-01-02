@@ -98,6 +98,10 @@
           "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
+          "label": "Enable \"Reset\"",
+          "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!"
+        },
+        {
           "label": "Tipo de Pregunta",
           "description": "Selecciona o aspecto e comportamento da pregunta.",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "Descrición para as tecnoloxías de asistencia do botón \"Tentar de novo\"",
           "default": "Tenta de novo a tarefa. Borra todas as respostas e comeza a tarefa de novo."
+        },
+        {
+          "label": "Text for \"Reset\" button",
+          "default": "Reset"
+        },
+        {
+          "label": "Assistive technology description for \"Reset\" button",
+          "default": "Reset the task after completion."
         },
         {
           "label": "O teu resultado",

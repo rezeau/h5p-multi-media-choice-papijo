@@ -98,6 +98,10 @@
           "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
+          "label": "Enable \"Reset\"",
+          "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!"
+        },
+        {
           "label": "문제유형",
           "description": "문제의 모양과 동작을 선택하십시오",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "\"Retry\"(재시도) 버튼의 보조 기술 레이블",
           "default": "재시도하세요. 모든 답변을 초기화하고 새로 시작하세요."
+        },
+        {
+          "label": "Text for \"Reset\" button",
+          "default": "Reset"
+        },
+        {
+          "label": "Assistive technology description for \"Reset\" button",
+          "default": "Reset the task after completion."
         },
         {
           "label": "결과",

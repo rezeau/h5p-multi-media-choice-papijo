@@ -98,6 +98,10 @@
           "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
+          "label": "Enable \"Reset\"",
+          "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!"
+        },
+        {
           "label": "Galdera-mota",
           "description": "Aukeratu ezazu galderaren itxura eta portaera.",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "\"Saiatu berriro\" botoiaren laguntza-teknologientzako etiketa",
           "default": "Zeregina berriz egiten saiatu. Berrabiarazi erantzun guztiak eta hasi zeregina berriz."
+        },
+        {
+          "label": "Text for \"Reset\" button",
+          "default": "Reset"
+        },
+        {
+          "label": "Assistive technology description for \"Reset\" button",
+          "default": "Reset the task after completion."
         },
         {
           "label": "Zure emaitza",

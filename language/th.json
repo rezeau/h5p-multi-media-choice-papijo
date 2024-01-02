@@ -98,6 +98,10 @@
           "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
+          "label": "Enable \"Reset\"",
+          "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!"
+        },
+        {
           "label": "ประเภทคำถาม",
           "description": "เลือกลักษณะและพฤติกรรมของคำถาม",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "คำอธิบายเทคโนโลยีช่วยให้เข้าใจได้สำหรับปุ่ม \"ลองอีกครั้ง\"",
           "default": "ลองทำงานอีกครั้งโดยไม่ต้องเริ่มต้นใหม่"
+        },
+        {
+          "label": "Text for \"Reset\" button",
+          "default": "Reset"
+        },
+        {
+          "label": "Assistive technology description for \"Reset\" button",
+          "default": "Reset the task after completion."
         },
         {
           "label": "ข้อความสำหรับปุ่ม \"ยกเลิก\"",

@@ -98,6 +98,10 @@
           "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
+          "label": "Enable \"Reset\"",
+          "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!"
+        },
+        {
           "label": "Тип вопроса",
           "description": "Выберите внешний вид и поведение вопроса.",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "Описание вспомогательной технологии для кнопки \"Повторить\"",
           "default": "Повторите попытку. Сбросьте все ответы и запустите задачу заново."
+        },
+        {
+          "label": "Text for \"Reset\" button",
+          "default": "Reset"
+        },
+        {
+          "label": "Assistive technology description for \"Reset\" button",
+          "default": "Reset the task after completion."
         },
         {
           "label": "Ваш результат",

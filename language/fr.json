@@ -98,6 +98,10 @@
           "label": "Exiger que toutes les réponses soient correctes avant d'afficher les légendes."
         },
         {
+          "label": "Activer la touche « Réinitialiser »",
+          "description": "Ajouter un bouton « Réinitialiser » lorsque l'activité est terminée. Cela permettra juste de rafraîchir l'URL actuelle. Il est possible que cela ne fonctionne pas dans certains environnements, veuillez donc vérifier sur votre plateforme avant de l'activer !"
+        },
+        {
           "label": "Type de question",
           "description": "Sélectionner l'aspect et le comportement de la question.",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "Description de la technologie fonctionnelle pour la touche « Réessayer »",
           "default": "Réessayer la tâche. Réinitialiser toutes les réponses et recommencer la tâche."
+        },
+        {
+          "label": "Texte pour le bouton « Réinitialiser »",
+          "default": "Réinitialiser"
+        },
+        {
+          "label": "Description de la technologie fonctionnelle pour le bouton « Réinitialiser »",
+          "default": "Réinitialiser l'activité lorsqu'elle est terminée."
         },
         {
           "label": "Votre résultat",

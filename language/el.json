@@ -98,6 +98,10 @@
           "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
+          "label": "Enable \"Reset\"",
+          "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!"
+        },
+        {
           "label": "Τύπος ερώτησης",
           "description": "Επιλέξτε την εμφάνιση και τη συμπεριφορά της ερώτησης.",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \"Επανάληψη\"",
           "default": "Επανάληψη της εργασίας. Επαναφέρετε όλες τις απαντήσεις και ξεκινήστε την εργασία από την αρχή."
+        },
+        {
+          "label": "Text for \"Reset\" button",
+          "default": "Reset"
+        },
+        {
+          "label": "Assistive technology description for \"Reset\" button",
+          "default": "Reset the task after completion."
         },
         {
           "label": "Το αποτέλεσμά σας",

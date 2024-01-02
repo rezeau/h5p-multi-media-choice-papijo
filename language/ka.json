@@ -98,6 +98,10 @@
           "label": "Require that all answers are correct before the legends can be viewed"
         },
         {
+          "label": "Enable \"Reset\"",
+          "description": "Add a \"Reset\" button when the activity is over. This will simply refresh the current URL. It may not work in some environments, so please check on your platform before enabling it!"
+        },
+        {
           "label": "შეკითხვის ტიპი",
           "description": "აირჩიე შეკითხვის შესახედაობა და ქცევა.",
           "options": [
@@ -207,6 +211,14 @@
         {
           "label": "დამხმარე ტექნოლოგიის აღწერა \"გამეორების\" ღილაკისთვის",
           "default": "თავიდან სცადეთ დავალება. წაშალე ყველა პასუხი და თავიდან სცადე დავალების შესრულება."
+        },
+        {
+          "label": "Text for \"Reset\" button",
+          "default": "Reset"
+        },
+        {
+          "label": "Assistive technology description for \"Reset\" button",
+          "default": "Reset the task after completion."
         },
         {
           "label": "შენი შედეგი",
