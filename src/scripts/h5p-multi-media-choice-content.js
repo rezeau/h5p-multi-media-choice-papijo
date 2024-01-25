@@ -34,10 +34,10 @@ export default class MultiMediaChoiceContent {
 
     this.aspectRatio = this.params.behaviour.aspectRatio;
     this.shuffleImages = this.params.behaviour.shuffleImages;
+    this.enableImagesNumber = this.params.behaviour.enableImagesNumber;
     this.lastSelectedRadioButtonOption = null;
     this.content = document.createElement('div');
     this.content.classList.add('h5p-multi-media-choice-content');
-
 
     // Add default media so it is always two
     if (!this.params.options || this.params.options.length < 2) {
@@ -63,7 +63,7 @@ export default class MultiMediaChoiceContent {
         this.params.options = [{}, {}].fill(defaultMedia);
       }
     }
-
+    
     // Build n options
     let newOptions = this.params.options;
     if (this.shuffleImages) {
@@ -89,8 +89,14 @@ export default class MultiMediaChoiceContent {
           )
       )
       : [];
+    if (this.enableImagesNumber) {
+      this.nbImages = this.buildNumberImages();
+      this.content.appendChild(this.nbImages);
+      // Here wait for images number to be selected before continuing with content append flow...
+    }
     this.optionList = this.buildOptionList(this.options);
     this.content.appendChild(this.optionList);
+  
     this.setTabIndexes();
 
     // Use masonry library
@@ -118,6 +124,46 @@ export default class MultiMediaChoiceContent {
       optionList.appendChild(option.getDOM());
     });
     return optionList;
+  }
+
+  /**
+   * Build nbImages.
+   */
+   
+  buildNumberImages() {
+    let self = this;
+    const numImages = this.params.options.length;
+    const $nbImages = document.createElement('div');
+    $nbImages.className = 'h5p-multi-media-choice-number h5p-multi-media-choice-options';
+    $nbImages.innerHTML = 'How many images do you want? out of ' + numImages;
+    // Create the div element
+    const $optionButtons = document.createElement('div');
+    // Set the class for the div element
+    $optionButtons.className = 'h5p-multi-media-choice-buttons';
+    // Append the div element to $nbImages (assuming $nbImages is already defined)
+    $nbImages.appendChild($optionButtons);
+    // Allow user to select a number of cards to play with, by displaying selectable buttons in increments of 5.
+    let n = 0;
+    if (numImages <= 50) {
+      n = 5;
+    }
+    let limit = Math.min(numImages, 100);
+    for (let i = n; i < limit; i += n) {
+      self.$button = H5P.JoubelUI.createButton({
+          'class': 'h5p-dialogcards-number-button',
+          'title': i,
+          'html': i,
+          'id': 'dc-number-' + i
+        }).click(function () {
+          // Here insert optionList to content, based on selected number of options/images
+        }).appendTo($optionButtons);
+    }
+    self.$button = H5P.JoubelUI.createButton({
+          'class': 'h5p-dialogcards-number-button',
+          'title': numImages,
+          'html': 'all Images' + " (" + numImages + ")"
+        }).appendTo($optionButtons);
+    return $nbImages;
   }
 
   /**

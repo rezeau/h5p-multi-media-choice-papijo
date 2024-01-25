@@ -19,7 +19,8 @@ export class Util {
           confirmCheckDialog: false,
           confirmRetryDialog: false,
           aspectRatio: 'auto',
-          maxAlternativesPerRow: 4
+          maxAlternativesPerRow: 4,
+          enableImagesNumber: false
         },
         l10n: {
           checkAnswerButtonText: 'Check',
@@ -49,7 +50,9 @@ export class Util {
             confirmLabel: 'Retry'
           },
           missingAltText: 'Alt text missing',
-          tipButtonLabel: 'Show tip'
+          tipButtonLabel: 'Show tip',
+          numCardsQuestion: 'How many cards do you want?',
+          allCards: 'all the cards'
         }
       },
       params

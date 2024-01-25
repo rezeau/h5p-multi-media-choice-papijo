@@ -262,6 +262,14 @@
         "optional": true
       },
       {
+        "name": "enableImagesNumber",
+        "type": "boolean",
+        "label": "Select number of images displayed",
+        "importance": "low",
+        "description": "Allow user to select the number of images drawn from the pool",
+        "default": false
+      },
+      {
         "name": "questionType",
         "type": "select",
         "label": "Question Type",
