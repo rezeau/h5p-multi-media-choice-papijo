@@ -20,6 +20,7 @@ export class MultiMediaChoiceOption {
     this.media = option.media;
     this.correct = option.correct;
     this.legendDescription = option.legendDescription;
+    this.tip = option.tip;
     this.tipButtonLabel = tipButtonLabel;
     this.showLegendsRequiresAllCorrect = showLegendsRequiresAllCorrect;
     this.callbacks = callbacks || {};

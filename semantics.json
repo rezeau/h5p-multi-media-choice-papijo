@@ -267,7 +267,16 @@
         "label": "Select number of images displayed",
         "importance": "low",
         "description": "Allow user to select the number of images drawn from the pool",
-        "default": false
+        "default": false,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "shuffleImages",
+              "equals": true
+            }
+          ]
+        }
       },
       {
         "name": "questionType",

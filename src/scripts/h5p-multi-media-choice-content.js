@@ -63,13 +63,13 @@ export default class MultiMediaChoiceContent {
         this.params.options = [{}, {}].fill(defaultMedia);
       }
     }
-    
+
     // Build n options
-    let newOptions = this.params.options;
     if (this.shuffleImages) {
-      newOptions = H5P.shuffleArray(this.params.options);
+      H5P.shuffleArray(this.params.options);
     }
-    this.options = newOptions
+
+    this.options = this.params.options
       ? this.params.options.map(
         (option, index) =>
           new MultiMediaChoiceOption(
@@ -89,14 +89,18 @@ export default class MultiMediaChoiceContent {
           )
       )
       : [];
-    if (this.enableImagesNumber) {
+
+    if (this.shuffleImages && this.enableImagesNumber) {
       this.nbImages = this.buildNumberImages();
       this.content.appendChild(this.nbImages);
       // Here wait for images number to be selected before continuing with content append flow...
+      this.optionList = this.buildOptionList(this.options);
     }
-    this.optionList = this.buildOptionList(this.options);
-    this.content.appendChild(this.optionList);
-  
+    else {
+      this.optionList = this.buildOptionList(this.options);
+      this.content.appendChild(this.optionList);
+    }
+
     this.setTabIndexes();
 
     // Use masonry library
@@ -107,6 +111,7 @@ export default class MultiMediaChoiceContent {
 
     // Toggle selected
     answerState.forEach(index => this.toggleSelected(index, false));
+
   }
 
   /**
@@ -129,9 +134,9 @@ export default class MultiMediaChoiceContent {
   /**
    * Build nbImages.
    */
-   
+
   buildNumberImages() {
-    let self = this;
+    let self = this;    
     const numImages = this.params.options.length;
     const $nbImages = document.createElement('div');
     $nbImages.className = 'h5p-multi-media-choice-number h5p-multi-media-choice-options';
@@ -148,6 +153,7 @@ export default class MultiMediaChoiceContent {
       n = 5;
     }
     let limit = Math.min(numImages, 100);
+    
     for (let i = n; i < limit; i += n) {
       self.$button = H5P.JoubelUI.createButton({
           'class': 'h5p-dialogcards-number-button',
@@ -155,13 +161,59 @@ export default class MultiMediaChoiceContent {
           'html': i,
           'id': 'dc-number-' + i
         }).click(function () {
-          // Here insert optionList to content, based on selected number of options/images
+        /** Select options to be displayed as follows: 
+         * make sure we have at least one correct and one incorrect option
+         * limit total number of options to the value of selected button (5, 10, 15, 20, ...)
+         * make sure we do not have duplicate options.
+        */
+
+        // Use a Set to ensure uniqueness
+        const uniqueData = Array.from(new Set(self.options.map(JSON.stringify)), JSON.parse);
+
+        // Filter correct:true and correct:false elements
+        const correctTrue = uniqueData.filter(item => item.correct === true);
+        const correctFalse = uniqueData.filter(item => item.correct === false);
+        // Initialize selectedElements as an empty array
+        const selectedElements = [];
+
+        // Select one correct:true and one correct:false
+        selectedElements.push(...correctTrue.slice(0, 1), ...correctFalse.slice(0, 1));
+
+        // Define the desired number of multiples of 5
+        const desiredMultiplesOf5 = i / 5;
+
+        // Calculate the remaining number of elements needed
+        const remainingElements = 5 * desiredMultiplesOf5 - selectedElements.length;
+        const shuffledElements = uniqueData;
+        // Select additional unique elements to meet the desired count
+        for (let i = 0; i < remainingElements && shuffledElements.length > 0; i++) {
+            let selected;
+            do {
+                selected = shuffledElements.pop();
+            } while (selectedElements.some(element => element.media.subContentId === selected.media.subContentId));
+            selectedElements.push(selected);
+        }
+
+        // To avoid single correct option being always the first to be displayed.
+        if (self.isSingleAnswer) {
+          H5P.shuffleArray(selectedElements);
+        }
+        // Check that selectedElements are OK.
+        for (let j = 0; j < selectedElements.length; j++) {
+            console.log(`correct: ${selectedElements[j].correct}\n tip: ${selectedElements[j].tip}`);
+        }
+          this.optionList = self.buildOptionList(selectedElements);
+          self.content.appendChild(this.optionList);
         }).appendTo($optionButtons);
     }
+
     self.$button = H5P.JoubelUI.createButton({
           'class': 'h5p-dialogcards-number-button',
           'title': numImages,
           'html': 'all Images' + " (" + numImages + ")"
+        }).click(function () {
+          this.optionList = self.buildOptionList(self.options);
+          self.content.appendChild(this.optionList);
         }).appendTo($optionButtons);
     return $nbImages;
   }
