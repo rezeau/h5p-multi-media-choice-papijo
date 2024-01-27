@@ -94,7 +94,7 @@ export default class MultiMediaChoiceContent {
       this.nbImages = this.buildNumberImages();
       this.content.appendChild(this.nbImages);
       // Here wait for images number to be selected before continuing with content append flow...
-      this.optionList = this.buildOptionList(this.options);
+      this.optionList = this.buildOptionList();
     }
     else {
       this.optionList = this.buildOptionList(this.options);
@@ -202,6 +202,7 @@ export default class MultiMediaChoiceContent {
         for (let j = 0; j < selectedElements.length; j++) {
             console.log(`correct: ${selectedElements[j].correct}\n tip: ${selectedElements[j].tip}`);
         }
+        // TODO This does not work: the selectedElements list is not passed to buildOptionList!
           this.optionList = self.buildOptionList(selectedElements);
           self.content.appendChild(this.optionList);
         }).appendTo($optionButtons);
