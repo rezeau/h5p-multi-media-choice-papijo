@@ -4,8 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = (nodeEnv === 'production');
-//const libraryName = process.env.npm_package_name;
-const libraryName = 'h5p-multi-media-choice-papijo'
+const libraryName = process.env.npm_package_name;
 module.exports = {
   mode: nodeEnv,
   context: path.resolve(__dirname, 'src'),

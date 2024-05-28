@@ -260,8 +260,8 @@
           "default": "Texte Alt manquant"
         },
         {
-          "label": "Texte pour « Afficher l'indice »",
-          "default": "Afficher l'indice"
+          "label": "Texte pour « Afficher l’indice »",
+          "default": "Afficher l’indice"
         }
       ]
     }
