@@ -1,9 +1,9 @@
 {
-  "title": "Image Choice Papi Jo",
-  "description": "Create an Image Choice",
+  "title": "Multimedia Choice Papi Jo",
+  "description": "Create a Multimedia Choice",
   "majorVersion": 0,
   "minorVersion": 3,
-  "patchVersion": 17,
+  "patchVersion": 18,
   "runnable": 1,
   "author": "Joubel AS",
   "license": "MIT",

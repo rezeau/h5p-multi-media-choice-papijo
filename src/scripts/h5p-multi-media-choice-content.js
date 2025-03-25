@@ -1,5 +1,6 @@
 import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
 import * as Masonry from 'masonry-layout';
+import { createElement } from './h5p-multi-media-choice-util';
 
 const optionMinWidth = 210;
 const columnGap = 20;
@@ -33,11 +34,12 @@ export default class MultiMediaChoiceContent {
         : this.params.behaviour.questionType === 'single';
 
     this.aspectRatio = this.params.behaviour.aspectRatio;
-    this.shuffleImages = this.params.behaviour.shuffleImages;
-    this.lastSelectedRadioButtonOption = null;
-    this.content = document.createElement('div');
-    this.content.classList.add('h5p-multi-media-choice-content');
 
+    this.shuffleImages = this.params.behaviour.shuffleImages;
+
+    this.lastSelectedRadioButtonOption = null;
+
+    this.content = createElement({type: 'div', classList: ['h5p-multi-media-choice-content']});
 
     // Add default media so it is always two
     if (!this.params.options || this.params.options.length < 2) {
@@ -73,18 +75,21 @@ export default class MultiMediaChoiceContent {
       ? this.params.options.map(
         (option, index) =>
           new MultiMediaChoiceOption(
+            this.content,
             option,
             contentId,
             this.aspectRatio,
             this.isSingleAnswer,
             this.showLegendsRequiresAllCorrect,
-            this.params.l10n.missingAltText,
+            this.params.l10n.missingAltText,            
             this.params.l10n.tipButtonLabel,
+            this.params.l10n.closeModalText,
             {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),
               onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
-              triggerResize: this.callbacks.triggerResize
+              triggerResize: this.callbacks.triggerResize,
+              pauseAllOtherMedia: () => this.pauseAllOtherMedia(index),
             }
           )
       )
@@ -109,10 +114,14 @@ export default class MultiMediaChoiceContent {
    * @return {HTMLElement} List view of options.
    */
   buildOptionList() {
-    const optionList = document.createElement('ul');
-    optionList.setAttribute('role', this.isSingleAnswer ? 'radiogroup' : 'group');
-    optionList.setAttribute('aria-labelledby', `h5p-media-choice${this.contentId}`);
-    optionList.classList.add('h5p-multi-media-choice-option-list');
+    const optionList = createElement({
+      type: 'ul',
+      classList: ['h5p-multi-media-choice-option-list'],
+      attributes: {
+        role: this.isSingleAnswer ? 'radiogroup' : 'group',
+        'aria-labelledby': `h5p-media-choice${this.contentId}`
+      }
+    });
 
     this.options.forEach(option => {
       optionList.appendChild(option.getDOM());
@@ -234,9 +243,8 @@ export default class MultiMediaChoiceContent {
    * Show which selected options are right and which are wrong
    */
   showSelectedSolutions() {
-    this.options.forEach((option, index) =>
+    this.options.forEach(option =>
       option.showSelectedSolution({
-        index,
         finished: this.isPassed(),
         showLegendsRequiresAllCorrect: this.params.behaviour.showLegendsRequiresAllCorrect,
         correctAnswer: this.params.l10n.correctAnswer,
@@ -314,7 +322,6 @@ export default class MultiMediaChoiceContent {
     if (option.isDisabled() || isTipShown) {
       return;
     }
-
     if (this.isSingleAnswer) {
       if (option.isSelected()) {
         return; // Disables unchecking radio buttons
@@ -451,14 +458,40 @@ export default class MultiMediaChoiceContent {
    * @param {string} assetsFilePath
    */
   setMultiMediaOptionsPlaceholder(assetsFilePath) {
-    let path = '';
     this.options.forEach(option => {
-      if (!option.media.params.file) {
-        const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-        path = `${assetsFilePath}/placeholder${placeholderAspectRatio}.svg`;
-        option.wrapper.querySelector('img').src = path;
+      switch (option?.media?.library?.split(' ')[0]) {
+        case 'H5P.Image':
+          if (!option.media.params.file) {
+            this.setPlaceholderImage(assetsFilePath, 'Image', option);
+          }
+          break;
+        case 'H5P.Video':
+          if (!option.media.params.visuals.poster) {
+            const mediaType = (option.media.params.sources ? 'Other': 'Video');
+            this.setPlaceholderImage(assetsFilePath, mediaType, option);
+          }
+          break;
+        case 'H5P.Audio':
+          if (!option.option.poster) { 
+            const mediaType = (option.media.params.files ? 'Other': 'Audio');
+            this.setPlaceholderImage(assetsFilePath, mediaType, option);
+          }
+          break;
       }
     });
+  }
+
+  /**
+   * Set options default images
+   * @param {string} assetsFilePath 
+   * @param {string} mediaType 
+   * @param {object} option 
+   */
+  setPlaceholderImage(assetsFilePath, mediaType, option) {
+    const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
+    const subPath = mediaType == 'Image' ? '' : mediaType;
+    let path = `${assetsFilePath}/placeholder${subPath}${placeholderAspectRatio}.svg`; 
+    option.wrapper.querySelector('img').src = path;
   }
 
   /**
@@ -467,5 +500,19 @@ export default class MultiMediaChoiceContent {
    */
   getAnswerGiven() {
     return this.isAnyAnswerSelected() || this.isBlankCorrect();
+  }
+
+  /**
+   * Stop all other media to ensure only 1 is playing
+   * @param {int} mediaToPlay index of media to play
+   */
+  pauseAllOtherMedia(mediaToPlay) {
+    if (this.options) {
+      this.options.forEach((option, index) => {
+        if (index != mediaToPlay)  {
+          option.pauseMedia();
+        }
+      });
+    }
   }
 }

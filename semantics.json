@@ -75,17 +75,33 @@
       "type": "group",
       "label": "Option",
       "importance": "high",
-      "expanded": false,
       "fields": [
         {
           "name": "media",
           "type": "library",
           "label": "Media",
           "optional": false,
-          "description": "Image to display as the choice. The alternative text is used by the report.",
+          "description": "Media to display as a choice.",
           "options": [
-            "H5P.Image 1.1"
+            "H5P.Image 1.1",
+            "H5P.Video 1.6",
+            "H5P.Audio 1.5"
           ]
+        },
+        {
+          "name": "poster",
+          "type": "image",
+          "label": "Poster image",
+          "importance": "low",
+          "widget": "showWhen",
+          "showWhen": {
+            "rules": [
+              {
+                "field": "media",
+                "equals": "H5P.Audio 1.5"
+              }
+            ]
+          }
         },
         {
           "name": "legendDescription",
@@ -201,7 +217,7 @@
         "label": "Enable \"Retry\" button",
         "type": "boolean",
         "importance": "low",
-        "default": "true",
+        "default": true,
         "optional": true
       },
       {
@@ -209,8 +225,8 @@
         "label": "Enable \"Show Solution\" button",
         "type": "boolean",
         "importance": "low",
-        "default": "true",
-        "optional": "true"
+        "default": true,
+        "optional": true
       },
       {
         "name": "confirmCheckDialog",
@@ -242,16 +258,7 @@
         "name": "showSolutionsRequiresInput",
         "type": "boolean",
         "default": true,
-        "optional": true,
-        "widget": "showWhen",
-        "showWhen": {
-          "rules": [
-            {
-              "field": "enableSolutionsButton",
-              "equals": true
-            }
-          ]
-        }
+        "optional": true
       },
       {
         "label": "Require that all answers are correct before the legends can be viewed",
@@ -457,7 +464,7 @@
         "importance": "low",
         "name": "confirmCheck",
         "type": "group",
-        "common": "true",
+        "common": true,
         "fields": [
           {
             "label": "Header text",
@@ -552,11 +559,11 @@
         "default": "Alt text missing"
       },
       {
-        "label": "Text for show tip",
+        "label": "Close modal button label",
         "importance": "low",
-        "name": "tipButtonLabel",
+        "name": "closeModalText",
         "type": "text",
-        "default": "Show tip"
+        "default": "Close modal"
       }
     ]
   }

@@ -1,13 +1,12 @@
 import MultiMediaChoiceContent from './h5p-multi-media-choice-content';
 
-import { Util } from './h5p-multi-media-choice-util';
+import { createElement, Util } from './h5p-multi-media-choice-util';
 import { getCurrentState, getXAPIData, getAnsweredXAPIEvent } from './h5p-multi-media-choice-xapi';
 
 /**
  * Class for H5P Multi Media Choice.
  */
 export default class MultiMediaChoice extends H5P.Question {
-
   /**
    * @constructor
    * @param {object} params Parameters passed by the editor.
@@ -17,13 +16,13 @@ export default class MultiMediaChoice extends H5P.Question {
   constructor(params, contentId, extras = {}) {
     super('multi-media-choice');
 
-    H5P.EventDispatcher.call(this);
     this.contentId = contentId;
     this.extras = extras;
     this.answerState = extras.previousState && extras.previousState.answers ? extras.previousState.answers : [];
 
     // Default values are extended
     this.params = Util.extendParams(params);
+
     this.content = new MultiMediaChoiceContent(
       this.params,
       contentId,
@@ -70,12 +69,8 @@ export default class MultiMediaChoice extends H5P.Question {
 
       // Register task introduction text
       if (this.params.question) {
-        this.introduction = document.createElement('div');
+        this.introduction = createElement({type: 'div', attributes: {id: `h5p-media-choice${contentId}`}});
         this.introduction.innerHTML = this.params.question;
-        this.introduction.setAttribute('id', `h5p-media-choice${contentId}`);
-        // papijo removed 2 lines throwing error, what is this div for?
-        // const div = document.createElement('img');
-        // div.src = this.getLibraryFilePath('assets/placeholder1to1.svg');
         this.setIntroduction(this.introduction);
       }
 
@@ -84,8 +79,6 @@ export default class MultiMediaChoice extends H5P.Question {
       this.addButtons();
 
       this.on('resize', () => this.content.setColumnProperties());
-      this.trigger('resize');
-
     };
 
     /**
@@ -117,8 +110,10 @@ export default class MultiMediaChoice extends H5P.Question {
 
     /**
      * Check answer.
+     * @param {object} params Parameters.
+     * @param {boolean} [params.skipXAPI] If true, do not send xAPI event.
      */
-    this.checkAnswer = () => {
+    this.checkAnswer = (params = {}) => {
       this.content.disableSelectables();
 
       const score = this.getScore();
@@ -139,19 +134,23 @@ export default class MultiMediaChoice extends H5P.Question {
       }
 
       this.hideButton('check-answer');
+
       this.showTips();
+
       this.content.showSelectedSolutions();
 
-      this.trigger(
-        getAnsweredXAPIEvent(
-          this,
-          this.params.question,
-          this.content.getOptions(),
-          this.getScore(),
-          this.getMaxScore(),
-          this.content.isPassed()
-        )
-      );
+      if (!params.skipXAPI) {
+        this.trigger(
+          getAnsweredXAPIEvent(
+            this,
+            this.params.question,
+            this.content.getOptions(),
+            this.getScore(),
+            this.getMaxScore(),
+            this.content.isPassed()
+          )
+        );
+      }
       // Needed if integrated into interactive book.
       if (!this.isRoot()) {
         this.trigger('resize');
@@ -167,19 +166,32 @@ export default class MultiMediaChoice extends H5P.Question {
       this.hideButton('check-answer');
       this.hideButton('show-solution');
 
-      // require input for solution behavior is not valid if the request is originated
-      // from compound content type
-      if (this.params.behaviour.showSolutionsRequiresInput
-        && !this.content.isAnyAnswerSelected()
-        && shouldRespectRequireInputFlag) {
-        // Require answer before solution can be viewed
-        this.updateFeedbackContent(this.params.l10n.noAnswer);
-        this.handleRead(this.params.l10n.noAnswer);
-      }
-      else {
+      const showSolutions = () => {
         this.content.showSelectedSolutions();
         this.content.showUnselectedSolutions();
         this.content.focusUnselectedSolution();
+      };
+
+      // require input for solution behavior is not valid if the request is originated
+      // from compound content type
+      if (shouldRespectRequireInputFlag) {
+        if (this.params.behaviour.showSolutionsRequiresInput
+          && !this.content.isAnyAnswerSelected()) {
+          // Require answer before solution can be viewed
+          this.updateFeedbackContent(this.params.l10n.noAnswer);
+          this.handleRead(this.params.l10n.noAnswer);
+        }
+        else {
+          showSolutions();
+        }
+      }
+      else {
+        // Call from outside (from compound content type)
+        this.checkAnswer({ skipXAPI: true });
+        this.hideButton('show-solution');
+        this.hideButton('try-again');
+
+        showSolutions();
       }
 
       this.trigger('resize');
@@ -220,11 +232,12 @@ export default class MultiMediaChoice extends H5P.Question {
     }
     return;
   }
+
   /**
    * Add the buttons that are passed to H5P.Question
    */
   addButtons() {
-    if (this.params.behaviour.enableCheckButton === undefined || this.params.behaviour.enableCheckButton) {
+    if (this.params.behaviour.enableCheckButton == undefined || this.params.behaviour.enableCheckButton) {
       this.addButton(
         'check-answer',
         this.params.l10n.checkAnswerButtonText,
@@ -301,6 +314,6 @@ export default class MultiMediaChoice extends H5P.Question {
    * Retrieve title of the content type
    */
   getTitle() {
-    return H5P.createTitle((this.extras && this.extras.metadata && this.extras.metadata.title) ? this.extras.metadata.title : 'Image Choice');
+    return H5P.createTitle((this.extras && this.extras.metadata && this.extras.metadata.title) ? this.extras.metadata.title : 'MultiMedia Choice');
   }
 }
