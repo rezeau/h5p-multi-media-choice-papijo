@@ -27,13 +27,16 @@
         "fields": [
           {
             "label": "Media",
-            "description": "Image à afficher comme choix. Le texte alternatif est utilisé par le rapport."
+            "description": "Média à afficher comme choix."
+          },
+          {
+            "label": "Poster image"
           },
           {
             "label": "Texte de la légende"
           },
           {
-            "label": "Correcte"
+            "label": "Indice"
           },
           {
             "label": "Correct"

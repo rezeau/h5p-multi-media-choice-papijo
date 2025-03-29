@@ -27,16 +27,19 @@
         "fields": [
           {
             "label": "Media",
-            "description": "Image to display as the choice. The alternative text is used by the report."
+            "description": "Media to display as a choice."
+          },
+          {
+            "label": "Poster image"
           },
           {
             "label": "Legend Text"
           },
           {
-            "label": "Correcto"
+            "label": "Tip"
           },
           {
-            "label": "Correct"
+            "label": "Correcto"
           }
         ]
       }
