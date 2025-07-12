@@ -448,23 +448,22 @@ export class MultiMediaChoiceOption {
         this.wrapper.classList.add('h5p-multi-media-choice-correct');
         this.addAccessibilitySolutionText(correctAnswer);
         // Display the legends of the correctly selected images.
-        if (!showLegendsRequiresAllCorrect) {
-          this.legend.classList.add(legendVisibleClass);
-          this.legend.classList.remove('h5p-multi-media-choice-hidden');
+        if (!showLegendsRequiresAllCorrect || finished) {
+          if (this.legendDescription !== '') {
+            this.legend.classList.add(legendVisibleClass);
+            this.legend.classList.remove('h5p-multi-media-choice-hidden');
+          }
         }
       }
       else {
         this.wrapper.classList.add('h5p-multi-media-choice-wrong');
         this.addAccessibilitySolutionText(wrongAnswer);
-      }
-      // If activity is finished, also display the legends for the non-selectable images.
-        if (finished) {
-          this.legend.classList.remove('h5p-multi-media-choice-hidden');
+        // Do not display an EMPTY incorrect feedback/legend.
+        if (this.legendDescription !== '') {
           this.legend.classList.add(legendVisibleClass);
-          if (this.aspectRatio !== 'auto' && !this.isSelected()) {
-            this.legend.classList.add('h5p-multi-media-choice-adjust');
-          }
+          this.legend.classList.remove('h5p-multi-media-choice-hidden');
         }
+      }
     }
   }
 
