@@ -2,17 +2,16 @@ import { MultiMediaChoiceOption } from './h5p-multi-media-choice-option';
 import * as Masonry from 'masonry-layout';
 import { createElement } from './h5p-multi-media-choice-util';
 
-const optionMinWidth = 210;
+//let optionMinWidth = 210;
 const columnGap = 20;
 
 /** Class representing the content */
 export default class MultiMediaChoiceContent {
   /**
-   * @constructor
+   * @class
    * @param {object} params Parameters.
    * @param {number} contentId Content's id.
-   * @param {object} [callbacks = {}] Callbacks.
-   * @param {string} assetsFilePath File path to the assets folder
+   * @param {object} callbacks Callbacks.
    * @param {number[]} answerState Previous answers given (when resuming)
    */
   constructor(params = {}, contentId, callbacks = {}, answerState) {
@@ -25,7 +24,7 @@ export default class MultiMediaChoiceContent {
     this.showLegendsRequiresAllCorrect = this.params.behaviour.showLegendsRequiresAllCorrect;
 
     this.numberOfCorrectOptions = params.options
-      ? params.options.filter(option => option.correct).length
+      ? params.options.filter((option) => option.correct).length
       : 0;
 
     this.isSingleAnswer =
@@ -39,21 +38,21 @@ export default class MultiMediaChoiceContent {
 
     this.lastSelectedRadioButtonOption = null;
 
-    this.content = createElement({type: 'div', classList: ['h5p-multi-media-choice-content']});
+    this.content = createElement({ type: 'div', classList: ['h5p-multi-media-choice-content'] });
 
     // Add default media so it is always two
-    if (!this.params.options || this.params.options.length < 2) {
+    if (!this.params.options || this.params.options.length < '2') {
       const defaultMedia = {
         media: {
           params: {
-            contentName: "Image"
+            contentName: 'Image'
           },
-          library: "H5P.Image",
+          library: 'H5P.Image',
           subContentId: params.contentId,
           metadata: {
-            contentType: "Image",
-            license: "U",
-            title: "Untitled Image"
+            contentType: 'Image',
+            license: 'U',
+            title: 'Untitled Image'
           }
         },
         correct: false
@@ -87,7 +86,7 @@ export default class MultiMediaChoiceContent {
             {
               onClick: () => this.toggleSelected(index),
               onKeyboardSelect: () => this.toggleSelected(index),
-              onKeyboardArrowKey: direction => this.handleOptionArrowKey(index, direction),
+              onKeyboardArrowKey: (direction) => this.handleOptionArrowKey(index, direction),
               triggerResize: this.callbacks.triggerResize,
               pauseAllOtherMedia: () => this.pauseAllOtherMedia(index),
             }
@@ -97,7 +96,6 @@ export default class MultiMediaChoiceContent {
     this.optionList = this.buildOptionList(this.options);
     this.content.appendChild(this.optionList);
     this.setTabIndexes();
-
     // Use masonry library
     this.masonry = new Masonry(this.optionList, {
       gutter: columnGap,
@@ -105,13 +103,13 @@ export default class MultiMediaChoiceContent {
     });
 
     // Toggle selected
-    answerState.forEach(index => this.toggleSelected(index, false));
+    answerState.forEach((index) => this.toggleSelected(index, false));
   }
 
   /**
    * Build options.
    * @param {object[]} options List of option objects.
-   * @return {HTMLElement} List view of options.
+   * @returns {HTMLElement} List view of options.
    */
   buildOptionList() {
     const optionList = createElement({
@@ -123,7 +121,7 @@ export default class MultiMediaChoiceContent {
       }
     });
 
-    this.options.forEach(option => {
+    this.options.forEach((option) => {
       optionList.appendChild(option.getDOM());
     });
     return optionList;
@@ -131,7 +129,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Return the DOM for this class
-   * @return {HTMLElement} DOM for this class
+   * @returns {HTMLElement} DOM for this class
    */
   getDOM() {
     return this.content;
@@ -155,7 +153,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Get maximum possible score.
-   * @return {number} Score necessary for mastering.
+   * @returns {number} Score necessary for mastering.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   getMaxScore() {
@@ -167,7 +165,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Get score
-   * @return {number} score based on the behaviour settings
+   * @returns {number} score based on the behaviour settings
    */
   getScore() {
     // One point if no correct options and no selected options
@@ -186,7 +184,7 @@ export default class MultiMediaChoiceContent {
 
     // Checkbox buttons. 1 point for correct answer, -1 point for incorrect answer
     let score = 0;
-    this.options.forEach(option => {
+    this.options.forEach((option) => {
       if (option.isSelected()) {
         option.isCorrect() ? score++ : score--;
       }
@@ -212,7 +210,7 @@ export default class MultiMediaChoiceContent {
    * @returns {object[]} Array of selected options
    */
   getSelectedOptions() {
-    return this.options.filter(option => option.isSelected());
+    return this.options.filter((option) => option.isSelected());
   }
 
   /**
@@ -243,7 +241,7 @@ export default class MultiMediaChoiceContent {
    * Show which selected options are right and which are wrong
    */
   showSelectedSolutions() {
-    this.options.forEach(option =>
+    this.options.forEach((option) =>
       option.showSelectedSolution({
         finished: this.isPassed(),
         showLegendsRequiresAllCorrect: this.params.behaviour.showLegendsRequiresAllCorrect,
@@ -257,7 +255,7 @@ export default class MultiMediaChoiceContent {
    * Show which unselected options were right
    */
   showUnselectedSolutions() {
-    this.options.forEach(option =>
+    this.options.forEach((option) =>
       option.showUnselectedSolution({
         shouldCheck: this.params.l10n.shouldCheck,
         shouldNotCheck: this.params.l10n.shouldNotCheck
@@ -284,14 +282,14 @@ export default class MultiMediaChoiceContent {
    * Hide the solution(s) cues
    */
   hideSolutions() {
-    this.options.forEach(option => option.hideSolution());
+    this.options.forEach((option) => option.hideSolution());
   }
 
   /**
    * Hide the legends / feedback
    */
   hideLegends() {
-    this.options.forEach(option => option.hideLegend());
+    this.options.forEach((option) => option.hideLegend());
   }
 
   /**
@@ -303,7 +301,7 @@ export default class MultiMediaChoiceContent {
   toggleSelected(optionIndex, triggerInteracted = true) {
     // Routine for giving tip clicked precedence over image clicked.
     // If any tip has been clicked and is expanded, return...
-    const tips = document.getElementsByClassName("joubel-tip-container");
+    const tips = document.getElementsByClassName('joubel-tip-container');
     let isTipShown = false;
     let ariaExpandedValue = false;
     for (let index = 0; index < tips.length; index++) {
@@ -350,7 +348,7 @@ export default class MultiMediaChoiceContent {
     if (this.aspectRatio !== 'auto') {
       legendVisibleClass += '-ratio';
     }
-    this.options.forEach(option => {
+    this.options.forEach((option) => {
       option.uncheck();
       option.enable();
       option.legend.classList.remove(legendVisibleClass);
@@ -362,7 +360,7 @@ export default class MultiMediaChoiceContent {
    * Disables all selectables (radio buttons / checkboxes)
    */
   disableSelectables() {
-    this.options.forEach(option => option.disable());
+    this.options.forEach((option) => option.disable());
     this.setTabIndexes(-1);
   }
 
@@ -370,22 +368,20 @@ export default class MultiMediaChoiceContent {
    * Set the tabindex of every option.
    * For checkbox options, all options are tabbable.
    * For radio button options, only the first option is tabbable.
-   *
-   * @param {number} [value=null] Tabindex to set to all options.
+   * @param {number} [value] Tabindex to set to all options.
    */
   setTabIndexes(value = null) {
     if (this.isSingleAnswer) {
-      this.options.forEach(option => option.setTabIndex(value !== null ? value : -1));
+      this.options.forEach((option) => option.setTabIndex(value !== null ? value : -1));
       this.options[0].setTabIndex(value !== null ? value : 0);
     }
     else {
-      this.options.forEach(option => option.setTabIndex(value !== null ? value : 0));
+      this.options.forEach((option) => option.setTabIndex(value !== null ? value : 0));
     }
   }
 
   /**
    * Handle arrow keys pressed on options
-   *
    * @param {number} index Index of option pressed
    * @param {string} direction Direction of arrow key pressed
    */
@@ -413,17 +409,22 @@ export default class MultiMediaChoiceContent {
   /**
    * Set elemnt width
    * @param  {HTMLElement} item
+   * @param width
    */
   resizeGridItem(item, width) {
-    item.style.width = width + 'px';
+    item.style.width = `${width  }px`;
   }
 
   /**
    * Set the number of columns and each element's size
    */
   setColumnProperties() {
+    let optionMinWidth = 210;
+    // Set optionMinWidth to smaller value to accomodate
+    if (this.maxAlternativesPerRow > 4) {
+      optionMinWidth = 100;
+    }
     const columnSpaceCount = this.optionList.getBoundingClientRect().width / (optionMinWidth + columnGap);
-
     // Find the number of columns from whichever is smaller: space, max values and number of options
     const columns = Math.floor(
       Math.min(columnSpaceCount, this.maxAlternativesPerRow, this.options.length)
@@ -440,7 +441,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Return a list with the selected indexes
-   * @return  {number[]} indexes
+   * @returns  {number[]} indexes
    */
   getSelectedIndexes() {
     const indexes = [];
@@ -458,7 +459,7 @@ export default class MultiMediaChoiceContent {
    * @param {string} assetsFilePath
    */
   setMultiMediaOptionsPlaceholder(assetsFilePath) {
-    this.options.forEach(option => {
+    this.options.forEach((option) => {
       switch (option?.media?.library?.split(' ')[0]) {
         case 'H5P.Image':
           if (!option.media.params.file) {
@@ -467,13 +468,13 @@ export default class MultiMediaChoiceContent {
           break;
         case 'H5P.Video':
           if (!option.media.params.visuals.poster) {
-            const mediaType = (option.media.params.sources ? 'Other': 'Video');
+            const mediaType = (option.media.params.sources ? 'Other' : 'Video');
             this.setPlaceholderImage(assetsFilePath, mediaType, option);
           }
           break;
         case 'H5P.Audio':
           if (!option.option.poster) { 
-            const mediaType = (option.media.params.files ? 'Other': 'Audio');
+            const mediaType = (option.media.params.files ? 'Other' : 'Audio');
             this.setPlaceholderImage(assetsFilePath, mediaType, option);
           }
           break;
@@ -496,7 +497,7 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Get Answer given
-   * @return {boolean} true if answers have been given, else false
+   * @returns {boolean} true if answers have been given, else false
    */
   getAnswerGiven() {
     return this.isAnyAnswerSelected() || this.isBlankCorrect();
