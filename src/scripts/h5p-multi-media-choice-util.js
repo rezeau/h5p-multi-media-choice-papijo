@@ -118,4 +118,4 @@ export const createElement = ({type, classList = [], attributes = {}}) => {
   }
 
   return element;
-}
+};

@@ -53,7 +53,6 @@ export class MultiMediaChoiceOption {
 
     const mediaContent = this.createMediaContent();
     this.wrapper.appendChild(mediaContent);
-    
     this.wrapper.appendChild(this.buildLegend(this.option));
     this.$wrapper = H5P.jQuery(this.wrapper);
     if (option.tip) {
@@ -155,7 +154,6 @@ export class MultiMediaChoiceOption {
         modal.focus();
         event.stopPropagation();
       });
-      
       return videoButton;
     }
     return document.createElement('div');
@@ -171,7 +169,6 @@ export class MultiMediaChoiceOption {
         class:'h5p-multi-media-content-audio-wrapper' + (this.option.poster ? '' : ' h5p-multi-media-content-media-button-centered')
       });
       H5P.jQuery(this.wrapper).append($audioWrapper);
-      
       //Only allow minimalistic playerMode
       this.media.params.playerMode = "minimalistic";
       this.media.params.propagateButtonClickEvents = false;
@@ -195,12 +192,12 @@ export class MultiMediaChoiceOption {
     let path = '';
     switch (this.media?.library?.split(' ')[0]) {
       case 'H5P.Image':
-        if (this.media.params.file) { 
+        if (this.media.params.file) {
           path = H5P.getPath(this.media.params.file.path, this.contentId);
         }
         break;
       case 'H5P.Video':
-        if (this.media.params.visuals.poster) { 
+        if (this.media.params.visuals.poster) {
           path = H5P.getPath(this.media.params.visuals.poster.path, this.contentId);
         }
         break;
@@ -276,7 +273,7 @@ export class MultiMediaChoiceOption {
     this.callbacks.pauseAllOtherMedia();
     let resize = () => this.callbacks.triggerResize();
 
-    instance.on(this.media.params?.sources[0]?.mime === 'video/Panopto' ? 'containerLoaded' : 'loaded', (e) => {
+    instance.on(this.media.params?.sources[0]?.mime === 'video/Panopto' ? 'containerLoaded' : 'loaded', () => {
       resize();
       resizeFrame(modalContent);
     });
@@ -301,9 +298,9 @@ export class MultiMediaChoiceOption {
         closeModal();
       }
 
-      if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB 
+      if (event.key === 'Tab' || event.keyCode === 9) { // 9 == TAB
         // make choice options unavailable from tabs
-        if (document.activeElement != firstFocusable && document.activeElement != lastFocusable) {
+        if (document.activeElement !== firstFocusable && document.activeElement !== lastFocusable) {
           firstFocusable.focus();
         }
         if ( event.shiftKey ) /* shift + tab */ {
@@ -322,9 +319,9 @@ export class MultiMediaChoiceOption {
     };
 
     window.onclick = function (event) {
-      if (event.target == modal || event.target == closeButton || event.target == modalContainer || event.target == cross) {
+      if (event.target === modal || event.target === closeButton || event.target === modalContainer || event.target === cross) {
         closeModal();
-      } 
+      }
     };
     resize();
     this.resizeWindow(modalContent);

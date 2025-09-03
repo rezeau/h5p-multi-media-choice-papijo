@@ -80,7 +80,7 @@ export default class MultiMediaChoiceContent {
             this.aspectRatio,
             this.isSingleAnswer,
             this.showLegendsRequiresAllCorrect,
-            this.params.l10n.missingAltText,            
+            this.params.l10n.missingAltText,
             this.params.l10n.tipButtonLabel,
             this.params.l10n.closeModalText,
             {
@@ -473,7 +473,7 @@ export default class MultiMediaChoiceContent {
           }
           break;
         case 'H5P.Audio':
-          if (!option.option.poster) { 
+          if (!option.option.poster) {
             const mediaType = (option.media.params.files ? 'Other' : 'Audio');
             this.setPlaceholderImage(assetsFilePath, mediaType, option);
           }
@@ -484,14 +484,14 @@ export default class MultiMediaChoiceContent {
 
   /**
    * Set options default images
-   * @param {string} assetsFilePath 
-   * @param {string} mediaType 
-   * @param {object} option 
+   * @param {string} assetsFilePath
+   * @param {string} mediaType
+   * @param {object} option
    */
   setPlaceholderImage(assetsFilePath, mediaType, option) {
     const placeholderAspectRatio = this.aspectRatio === 'auto' ? '1to1' : this.aspectRatio;
-    const subPath = mediaType == 'Image' ? '' : mediaType;
-    let path = `${assetsFilePath}/placeholder${subPath}${placeholderAspectRatio}.svg`; 
+    const subPath = mediaType === 'Image' ? '' : mediaType;
+    let path = `${assetsFilePath}/placeholder${subPath}${placeholderAspectRatio}.svg`;
     option.wrapper.querySelector('img').src = path;
   }
 
@@ -510,7 +510,7 @@ export default class MultiMediaChoiceContent {
   pauseAllOtherMedia(mediaToPlay) {
     if (this.options) {
       this.options.forEach((option, index) => {
-        if (index != mediaToPlay)  {
+        if (index !== mediaToPlay)  {
           option.pauseMedia();
         }
       });

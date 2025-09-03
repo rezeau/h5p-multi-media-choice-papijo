@@ -237,7 +237,7 @@ export default class MultiMediaChoice extends H5P.Question {
    * Add the buttons that are passed to H5P.Question
    */
   addButtons() {
-    if (this.params.behaviour.enableCheckButton == undefined || this.params.behaviour.enableCheckButton) {
+    if (this.params.behaviour.enableCheckButton === undefined || this.params.behaviour.enableCheckButton) {
       this.addButton(
         'check-answer',
         this.params.l10n.checkAnswerButtonText,
